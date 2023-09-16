@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		870DE31A2AAF0B5900146F59 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DE3192AAF0B5900146F59 /* Slot.swift */; };
+		870DE31C2AAF0D4800146F59 /* TimerCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DE31B2AAF0D4800146F59 /* TimerCounter.swift */; };
+		870DE31E2AB19AC900146F59 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DE31D2AB19AC900146F59 /* SelectionView.swift */; };
+		870DE3202AB1A94300146F59 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DE31F2AB1A94300146F59 /* TimerView.swift */; };
 		879CE42A2AAC4D7400822FEB /* WorkoutTimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CE4292AAC4D7400822FEB /* WorkoutTimerApp.swift */; };
-		879CE42C2AAC4D7400822FEB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CE42B2AAC4D7400822FEB /* ContentView.swift */; };
+		879CE42C2AAC4D7400822FEB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CE42B2AAC4D7400822FEB /* MainView.swift */; };
 		879CE42E2AAC4D7600822FEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 879CE42D2AAC4D7600822FEB /* Assets.xcassets */; };
 		879CE4312AAC4D7600822FEB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 879CE4302AAC4D7600822FEB /* Preview Assets.xcassets */; };
 		879CE43B2AAC4D7600822FEB /* WorkoutTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CE43A2AAC4D7600822FEB /* WorkoutTimerTests.swift */; };
@@ -34,9 +38,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		870DE3192AAF0B5900146F59 /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
+		870DE31B2AAF0D4800146F59 /* TimerCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCounter.swift; sourceTree = "<group>"; };
+		870DE31D2AB19AC900146F59 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
+		870DE31F2AB1A94300146F59 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		879CE4262AAC4D7400822FEB /* WorkoutTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		879CE4292AAC4D7400822FEB /* WorkoutTimerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimerApp.swift; sourceTree = "<group>"; };
-		879CE42B2AAC4D7400822FEB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		879CE42B2AAC4D7400822FEB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		879CE42D2AAC4D7600822FEB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		879CE4302AAC4D7600822FEB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		879CE4362AAC4D7600822FEB /* WorkoutTimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkoutTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,7 +103,11 @@
 			isa = PBXGroup;
 			children = (
 				879CE4292AAC4D7400822FEB /* WorkoutTimerApp.swift */,
-				879CE42B2AAC4D7400822FEB /* ContentView.swift */,
+				879CE42B2AAC4D7400822FEB /* MainView.swift */,
+				870DE31F2AB1A94300146F59 /* TimerView.swift */,
+				870DE31D2AB19AC900146F59 /* SelectionView.swift */,
+				870DE3192AAF0B5900146F59 /* Slot.swift */,
+				870DE31B2AAF0D4800146F59 /* TimerCounter.swift */,
 				879CE42D2AAC4D7600822FEB /* Assets.xcassets */,
 				879CE42F2AAC4D7600822FEB /* Preview Content */,
 			);
@@ -257,8 +269,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				879CE42C2AAC4D7400822FEB /* ContentView.swift in Sources */,
+				870DE3202AB1A94300146F59 /* TimerView.swift in Sources */,
+				879CE42C2AAC4D7400822FEB /* MainView.swift in Sources */,
 				879CE42A2AAC4D7400822FEB /* WorkoutTimerApp.swift in Sources */,
+				870DE31C2AAF0D4800146F59 /* TimerCounter.swift in Sources */,
+				870DE31A2AAF0B5900146F59 /* Slot.swift in Sources */,
+				870DE31E2AB19AC900146F59 /* SelectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,8 +439,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -432,9 +449,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AlekseyBu.WorkoutTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -452,8 +472,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -461,9 +482,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AlekseyBu.WorkoutTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
