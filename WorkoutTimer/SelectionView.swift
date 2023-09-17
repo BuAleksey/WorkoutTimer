@@ -9,17 +9,18 @@ import SwiftUI
 
 struct SelectionView: View {
     @Binding var choiceNumber: Int
+    var range = 1...100
     
     var body: some View {
-        HStack {
-            Button(action: { choiceNumber -= 1 }) {
-                Image(systemName: "arrow.down.square.fill")
-            }
-            Text(choiceNumber.formatted())
-            Button(action: { choiceNumber += 1 }) {
-                Image(systemName: "arrow.up.square.fill")
+        Picker("Rounds count", selection: $choiceNumber) {
+            ForEach(range, id: \.self) { number in
+                Text(number.formatted())
+                    .foregroundColor(Color("ActionColor"))
+                    .font(.system(size: 15, weight: .bold, design: .rounded))
             }
         }
+        .pickerStyle(WheelPickerStyle())
+        .frame(height: 100)
     }
 }
 
