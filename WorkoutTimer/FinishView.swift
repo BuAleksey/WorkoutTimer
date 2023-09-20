@@ -15,9 +15,10 @@ struct FinishView: View {
         Text(text)
             .foregroundColor(Color("ActionColor"))
             .font(.system(size: 40, weight: .bold, design: .rounded))
+            .transition(.move(edge: .leading))
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    withAnimation {
+                    withAnimation(.easeIn(duration: 0.5)) {
                        text = "IT'S AMAZING"
                     }
                 }

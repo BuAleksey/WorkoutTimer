@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State var slots = Slot.defaultSlots
-    @State var rounds = 3
+    @State var rounds = 1
     @State var cycleCount = 1
     @State var settingsIsHidden = false
     @State var showFinishView = false
@@ -28,29 +28,36 @@ struct MainView: View {
                     cycleCount: $cycleCount,
                     settingsIsHidden: $settingsIsHidden
                 )
+                .transition(.move(edge: .bottom))
             } else {
-                    ScrollViewReader { value in
-                        ScrollView(showsIndicators: false) {
-                            LazyVStack {
-                                ForEach($slots) { slot in
-                                    TimerView(slot: slot, cycle: $cycleCount)
-                                        .frame(height: UIScreen.main.bounds.height)
-                                }
+                ScrollViewReader { value in
+                    ScrollView(showsIndicators: false) {
+                        LazyVStack {
+                            ForEach($slots) { slot in
+                                TimerView(slot: slot, cycle: $cycleCount, settingsIsHidden: $settingsIsHidden)
+                                    .frame(height: UIScreen.main.bounds.height)
                             }
                         }
-                        .onChange(of: cycleCount, perform: { _ in
-                            withAnimation() {
-                                value.scrollTo(cycleCount, anchor: .top)
-                                if slots.last!.id < cycleCount {
-                                    showFinishView.toggle()
-                                    settingsIsHidden.toggle()
-                                }
+                    }
+                    .onChange(of: cycleCount, perform: { _ in
+                        withAnimation() {
+                            value.scrollTo(cycleCount, anchor: .top)
+                            if slots.last!.id < cycleCount {
+                                showFinishView.toggle()
+                                settingsIsHidden.toggle()
                             }
-                        })
-                        .ignoresSafeArea()
-                        .disabled(true)
+                        }
+                    })
+                    .ignoresSafeArea()
+                    .disabled(true)
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                            settingsIsHidden.toggle()
+                        }
                     }
                 }
+                .transition(.move(edge: .bottom))
+            }
         }
     }
 }

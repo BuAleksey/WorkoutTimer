@@ -14,9 +14,15 @@ struct SettingsView: View {
     @Binding var settingsIsHidden: Bool
     
     @State private var traningTimeInMinutes = 0
-    @State private var traningTimeInSeconds = 5
+    @State private var traningTimeInSeconds = 0
+    
     @State private var restTimeInMinutes = 0
-    @State private var restTimeInSeconds = 3
+    @State private var restTimeInSeconds = 0
+    
+    @State private var hintIsShow = false
+    
+    var trainingTimeCount: Int { traningTimeInMinutes * 60 + traningTimeInSeconds }
+    var resrTimeCount: Int { restTimeInMinutes * 60 + restTimeInSeconds }
     
     var body: some View {
         VStack {
@@ -43,7 +49,7 @@ struct SettingsView: View {
                         .font(.system(size: 15, weight: .bold, design: .rounded))
                         HStack(spacing: -15) {
                             SelectionView(choiceNumber: $traningTimeInMinutes, range: 0...60)
-                            SelectionView(choiceNumber: $traningTimeInSeconds)
+                            SelectionView(choiceNumber: $traningTimeInSeconds, range: 0...60)
                         }
                     }
                 }
@@ -59,12 +65,16 @@ struct SettingsView: View {
                         .font(.system(size: 15, weight: .bold, design: .rounded))
                         HStack(spacing: -15) {
                             SelectionView(choiceNumber: $restTimeInMinutes, range: 0...60)
-                            SelectionView(choiceNumber: $restTimeInSeconds)
+                            SelectionView(choiceNumber: $restTimeInSeconds, range: 0...60)
                         }
                     }
                 }
                 .foregroundColor(Color("ActionColor"))
             }
+            if hintIsShow {
+                HintView()
+            }
+            Spacer()
             Button(action: startTraining) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
@@ -81,23 +91,38 @@ struct SettingsView: View {
     
     private func startTraining() {
         createWorkout()
-        withAnimation {
-            settingsIsHidden.toggle()
+        if !slots.isEmpty {
+            withAnimation {
+                settingsIsHidden.toggle()
+            }
+        } else {
+            withAnimation {
+                hintIsShow = true
+            }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation {
+                    hintIsShow = false
+                }
+            }
         }
     }
     
     private func createWorkout() {
         slots.removeAll()
         var id = 0
-        for round in 1...rounds {
-            if round == rounds {
-                id += 1
-                slots.append(Slot(id: id, time: traningTimeInSeconds, option: .traning))
-            } else {
-                id += 1
-                slots.append(Slot(id: id, time: traningTimeInSeconds, option: .traning))
-                id += 1
-                slots.append(Slot(id: id, time: restTimeInSeconds, option: .rase))
+        if trainingTimeCount != 0 {
+            for round in 1...rounds {
+                if round == rounds {
+                    id += 1
+                    slots.append(Slot(id: id, time: trainingTimeCount, option: .traning))
+                } else {
+                    id += 1
+                    slots.append(Slot(id: id, time: trainingTimeCount, option: .traning))
+                    if resrTimeCount != 0 {
+                        id += 1
+                        slots.append(Slot(id: id, time: resrTimeCount, option: .rase))
+                    }
+                }
             }
         }
     }

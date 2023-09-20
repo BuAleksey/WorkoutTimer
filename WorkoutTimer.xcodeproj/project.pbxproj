@@ -11,6 +11,7 @@
 		870DE31C2AAF0D4800146F59 /* TimerCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DE31B2AAF0D4800146F59 /* TimerCounter.swift */; };
 		870DE31E2AB19AC900146F59 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DE31D2AB19AC900146F59 /* SelectionView.swift */; };
 		870DE3202AB1A94300146F59 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DE31F2AB1A94300146F59 /* TimerView.swift */; };
+		878BF8682ABB13C8006FD876 /* HintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BF8672ABB13C8006FD876 /* HintView.swift */; };
 		879483C32AB6BEE3008A2925 /* FinishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879483C22AB6BEE3008A2925 /* FinishView.swift */; };
 		879483C72AB6C962008A2925 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879483C62AB6C962008A2925 /* SettingsView.swift */; };
 		879CE42A2AAC4D7400822FEB /* WorkoutTimerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CE4292AAC4D7400822FEB /* WorkoutTimerApp.swift */; };
@@ -20,6 +21,8 @@
 		879CE43B2AAC4D7600822FEB /* WorkoutTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CE43A2AAC4D7600822FEB /* WorkoutTimerTests.swift */; };
 		879CE4452AAC4D7600822FEB /* WorkoutTimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CE4442AAC4D7600822FEB /* WorkoutTimerUITests.swift */; };
 		879CE4472AAC4D7600822FEB /* WorkoutTimerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CE4462AAC4D7600822FEB /* WorkoutTimerUITestsLaunchTests.swift */; };
+		87FAA4BC2ABAD0D40077E4AB /* TimePresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FAA4BB2ABAD0D40077E4AB /* TimePresent.swift */; };
+		87FAA4BF2ABADD1A0077E4AB /* CursedTimerUlil.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87FAA4BE2ABADD1A0077E4AB /* CursedTimerUlil.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,7 @@
 		870DE31B2AAF0D4800146F59 /* TimerCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCounter.swift; sourceTree = "<group>"; };
 		870DE31D2AB19AC900146F59 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		870DE31F2AB1A94300146F59 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		878BF8672ABB13C8006FD876 /* HintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintView.swift; sourceTree = "<group>"; };
 		879483C22AB6BEE3008A2925 /* FinishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishView.swift; sourceTree = "<group>"; };
 		879483C62AB6C962008A2925 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		879CE4262AAC4D7400822FEB /* WorkoutTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +60,9 @@
 		879CE4402AAC4D7600822FEB /* WorkoutTimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkoutTimerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		879CE4442AAC4D7600822FEB /* WorkoutTimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimerUITests.swift; sourceTree = "<group>"; };
 		879CE4462AAC4D7600822FEB /* WorkoutTimerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		87FAA4BB2ABAD0D40077E4AB /* TimePresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePresent.swift; sourceTree = "<group>"; };
+		87FAA4BE2ABADD1A0077E4AB /* CursedTimerUlil.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CursedTimerUlil.ttf; sourceTree = "<group>"; };
+		87FAA4C02ABADE010077E4AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,9 +119,13 @@
 				870DE31D2AB19AC900146F59 /* SelectionView.swift */,
 				870DE31F2AB1A94300146F59 /* TimerView.swift */,
 				879483C22AB6BEE3008A2925 /* FinishView.swift */,
+				878BF8672ABB13C8006FD876 /* HintView.swift */,
 				870DE3192AAF0B5900146F59 /* Slot.swift */,
 				870DE31B2AAF0D4800146F59 /* TimerCounter.swift */,
+				87FAA4BB2ABAD0D40077E4AB /* TimePresent.swift */,
 				879CE42D2AAC4D7600822FEB /* Assets.xcassets */,
+				87FAA4C02ABADE010077E4AB /* Info.plist */,
+				87FAA4BD2ABADCCA0077E4AB /* Fonts */,
 				879CE42F2AAC4D7600822FEB /* Preview Content */,
 			);
 			path = WorkoutTimer;
@@ -143,6 +154,14 @@
 				879CE4462AAC4D7600822FEB /* WorkoutTimerUITestsLaunchTests.swift */,
 			);
 			path = WorkoutTimerUITests;
+			sourceTree = "<group>";
+		};
+		87FAA4BD2ABADCCA0077E4AB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				87FAA4BE2ABADD1A0077E4AB /* CursedTimerUlil.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,6 +268,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87FAA4BF2ABADD1A0077E4AB /* CursedTimerUlil.ttf in Resources */,
 				879CE4312AAC4D7600822FEB /* Preview Assets.xcassets in Resources */,
 				879CE42E2AAC4D7600822FEB /* Assets.xcassets in Resources */,
 			);
@@ -275,6 +295,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87FAA4BC2ABAD0D40077E4AB /* TimePresent.swift in Sources */,
+				878BF8682ABB13C8006FD876 /* HintView.swift in Sources */,
 				870DE3202AB1A94300146F59 /* TimerView.swift in Sources */,
 				879483C72AB6C962008A2925 /* SettingsView.swift in Sources */,
 				879CE42C2AAC4D7400822FEB /* MainView.swift in Sources */,
@@ -444,6 +466,7 @@
 				DEVELOPMENT_TEAM = 7F9PNG6Y95;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WorkoutTimer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -477,6 +500,7 @@
 				DEVELOPMENT_TEAM = 7F9PNG6Y95;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WorkoutTimer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
