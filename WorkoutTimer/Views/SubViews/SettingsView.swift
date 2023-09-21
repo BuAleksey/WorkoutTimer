@@ -100,7 +100,11 @@ struct SettingsView: View {
     }
     
     private func startTraining() {
-        createWorkout()
+        slots = TrainingManager().createWorkout(
+            roundsCount: roundsCount,
+            trainingTimeCount: trainingTimeCount,
+            resrTimeCount: resrTimeCount
+        )
         if !slots.isEmpty {
             UIApplication.shared.isIdleTimerDisabled = true
             withAnimation {
@@ -113,44 +117,6 @@ struct SettingsView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     withAnimation {
                     hintIsShow = false
-                }
-            }
-        }
-    }
-    
-    private func createWorkout() {
-        slots.removeAll()
-        var id = 0
-        if trainingTimeCount != 0 {
-            for round in 1...roundsCount {
-                if round == roundsCount {
-                    id += 1
-                    slots.append(
-                        Slot(
-                            id: id,
-                            time: trainingTimeCount,
-                            option: .traning
-                        )
-                    )
-                } else {
-                    id += 1
-                    slots.append(
-                        Slot(
-                            id: id,
-                            time: trainingTimeCount,
-                            option: .traning
-                        )
-                    )
-                    if resrTimeCount != 0 {
-                        id += 1
-                        slots.append(
-                            Slot(
-                                id: id,
-                                time: resrTimeCount,
-                                option: .rase
-                            )
-                        )
-                    }
                 }
             }
         }
