@@ -11,6 +11,7 @@ import Combine
 final class TimerCounter: ObservableObject {    
     @Published var secondsCount = 0
     @Published var timerIsFinished = true
+    
     private var timer: Timer?
     
     func startTimer() {

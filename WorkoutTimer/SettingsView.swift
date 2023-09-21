@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Binding var slots: [Slot]
-    @Binding var rounds: Int
+    @Binding var roundsCount: Int
     @Binding var cycleCount: Int
     @Binding var settingsIsHidden: Bool
     
@@ -35,7 +35,7 @@ struct SettingsView: View {
                 VStack(spacing: -1) {
                     Text("ROUNDS")
                         .font(.system(size: 20, weight: .bold, design: .rounded))
-                    SelectionView(choiceNumber: $rounds)
+                    SelectionView(choiceNumber: $roundsCount)
                 }
                 .foregroundColor(Color("ActionColor"))
                 VStack {
@@ -48,8 +48,14 @@ struct SettingsView: View {
                         }
                         .font(.system(size: 15, weight: .bold, design: .rounded))
                         HStack(spacing: -15) {
-                            SelectionView(choiceNumber: $traningTimeInMinutes, range: 0...60)
-                            SelectionView(choiceNumber: $traningTimeInSeconds, range: 0...60)
+                            SelectionView(
+                                choiceNumber: $traningTimeInMinutes,
+                                range: 0...60
+                            )
+                            SelectionView(
+                                choiceNumber: $traningTimeInSeconds,
+                                range: 0...60
+                            )
                         }
                     }
                 }
@@ -64,8 +70,12 @@ struct SettingsView: View {
                         }
                         .font(.system(size: 15, weight: .bold, design: .rounded))
                         HStack(spacing: -15) {
-                            SelectionView(choiceNumber: $restTimeInMinutes, range: 0...60)
-                            SelectionView(choiceNumber: $restTimeInSeconds, range: 0...60)
+                            SelectionView(
+                                choiceNumber: $restTimeInMinutes,
+                                range: 0...60)
+                            SelectionView(
+                                choiceNumber: $restTimeInSeconds,
+                                range: 0...60)
                         }
                     }
                 }
@@ -92,6 +102,7 @@ struct SettingsView: View {
     private func startTraining() {
         createWorkout()
         if !slots.isEmpty {
+            UIApplication.shared.isIdleTimerDisabled = true
             withAnimation {
                 settingsIsHidden.toggle()
             }
@@ -111,16 +122,34 @@ struct SettingsView: View {
         slots.removeAll()
         var id = 0
         if trainingTimeCount != 0 {
-            for round in 1...rounds {
-                if round == rounds {
+            for round in 1...roundsCount {
+                if round == roundsCount {
                     id += 1
-                    slots.append(Slot(id: id, time: trainingTimeCount, option: .traning))
+                    slots.append(
+                        Slot(
+                            id: id,
+                            time: trainingTimeCount,
+                            option: .traning
+                        )
+                    )
                 } else {
                     id += 1
-                    slots.append(Slot(id: id, time: trainingTimeCount, option: .traning))
+                    slots.append(
+                        Slot(
+                            id: id,
+                            time: trainingTimeCount,
+                            option: .traning
+                        )
+                    )
                     if resrTimeCount != 0 {
                         id += 1
-                        slots.append(Slot(id: id, time: resrTimeCount, option: .rase))
+                        slots.append(
+                            Slot(
+                                id: id,
+                                time: resrTimeCount,
+                                option: .rase
+                            )
+                        )
                     }
                 }
             }
@@ -130,6 +159,11 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(slots: .constant(Slot.defaultSlots), rounds: .constant(3), cycleCount: .constant(1), settingsIsHidden: .constant(false))
+        SettingsView(
+            slots: .constant(Slot.defaultSlots),
+            roundsCount: .constant(3),
+            cycleCount: .constant(1),
+            settingsIsHidden: .constant(false)
+        )
     }
 }

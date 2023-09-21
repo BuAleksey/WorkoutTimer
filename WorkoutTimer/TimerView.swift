@@ -27,7 +27,15 @@ struct TimerView: View {
                     .foregroundColor(slot.option == .traning ? .accentColor : .white)
                     .font(.system(size: 50, weight: .bold, design: .rounded))
                     .rotationEffect(.degrees(shake ? 5 : 0))
-                    .animation(.interpolatingSpring(mass: 1, stiffness: 5, damping: 0, initialVelocity: 1), value: shake)
+                    .animation(
+                        .interpolatingSpring(
+                            mass: 1,
+                            stiffness: 5,
+                            damping: 0,
+                            initialVelocity: 1
+                        ),
+                        value: shake
+                    )
                     .opacity(blink ? 0.2 : 1)
                     .shadow(color: .accentColor, radius: 3, x: 3, y: 3)
                     .offset(y: 130)

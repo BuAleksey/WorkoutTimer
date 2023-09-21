@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @State var slots = Slot.defaultSlots
-    @State var rounds = 1
+    @State var roundsCount = 1
     @State var cycleCount = 1
     @State var settingsIsHidden = false
     @State var showFinishView = false
@@ -24,7 +24,7 @@ struct MainView: View {
             } else if !settingsIsHidden {
                 SettingsView(
                     slots: $slots,
-                    rounds: $rounds,
+                    roundsCount: $roundsCount,
                     cycleCount: $cycleCount,
                     settingsIsHidden: $settingsIsHidden
                 )
@@ -34,7 +34,11 @@ struct MainView: View {
                     ScrollView(showsIndicators: false) {
                         LazyVStack {
                             ForEach($slots) { slot in
-                                TimerView(slot: slot, cycle: $cycleCount, settingsIsHidden: $settingsIsHidden)
+                                TimerView(
+                                    slot: slot,
+                                    cycle: $cycleCount,
+                                    settingsIsHidden: $settingsIsHidden
+                                )
                                     .frame(height: UIScreen.main.bounds.height)
                             }
                         }
@@ -57,6 +61,11 @@ struct MainView: View {
                     }
                 }
                 .transition(.move(edge: .bottom))
+            }
+        }
+        .onChange(of: showFinishView) { _ in
+            if !showFinishView {
+                UIApplication.shared.isIdleTimerDisabled = false
             }
         }
     }
