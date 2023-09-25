@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct SetupWorkoutView: View {
     @Binding var slots: [Slot]
     @Binding var roundsCount: Int
     @Binding var cycleCount: Int
@@ -21,8 +21,12 @@ struct SettingsView: View {
     
     @State private var hintIsShow = false
     
-    var trainingTimeCount: Int { traningTimeInMinutes * 60 + traningTimeInSeconds }
-    var resrTimeCount: Int { restTimeInMinutes * 60 + restTimeInSeconds }
+    private var trainingTimeCount: Int {
+        traningTimeInMinutes * 60 + traningTimeInSeconds
+    }
+    private var resrTimeCount: Int {
+        restTimeInMinutes * 60 + restTimeInSeconds
+    }
     
     var body: some View {
         VStack {
@@ -42,7 +46,7 @@ struct SettingsView: View {
                     Text("TRAINING")
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                     VStack(spacing: -20) {
-                        HStack(spacing: 30) {
+                        HStack(spacing: 22) {
                             Text("min")
                             Text("sec")
                         }
@@ -64,7 +68,7 @@ struct SettingsView: View {
                     Text("REST")
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                     VStack(spacing: -20) {
-                        HStack(spacing: 30) {
+                        HStack(spacing: 22) {
                             Text("min")
                             Text("sec")
                         }
@@ -125,7 +129,7 @@ struct SettingsView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView(
+        SetupWorkoutView(
             slots: .constant(Slot.defaultSlots),
             roundsCount: .constant(3),
             cycleCount: .constant(1),
