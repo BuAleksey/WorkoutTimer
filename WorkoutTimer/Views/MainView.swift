@@ -8,25 +8,26 @@
 import SwiftUI
 
 struct MainView: View {
-    @State var slots = Slot.defaultSlots
-    @State var roundsCount = 1
-    @State var cycleCount = 1
-    @State var settingsIsHidden = false
-    @State var showFinishView = false
+    @State private var slots = Slot.defaultSlots
+    @State private var roundsCount = 5
+    @State private var cycleCount = 1
+    @State private var setupIsHidden = false
+    @State private var showFinishView = false
+    @State private var soundIsOn = true
     
     var body: some View {
         ZStack {
             Color.accentColor
                 .ignoresSafeArea()
-            
             if showFinishView {
                 FinishView(viewIsVisibly: $showFinishView)
-            } else if !settingsIsHidden {
-                SettingsView(
+                    .transition(.move(edge: .bottom))
+            } else if !setupIsHidden {
+                SetupWorkoutView(
                     slots: $slots,
                     roundsCount: $roundsCount,
-                    cycleCount: $cycleCount,
-                    settingsIsHidden: $settingsIsHidden
+                    setupIsHidden: $setupIsHidden,
+                    soundIsOn: $soundIsOn
                 )
                 .transition(.move(edge: .bottom))
             } else {
@@ -37,26 +38,27 @@ struct MainView: View {
                                 TimerView(
                                     slot: slot,
                                     cycle: $cycleCount,
-                                    settingsIsHidden: $settingsIsHidden
+                                    setupIsHidden: $setupIsHidden,
+                                    sounIsOn: $soundIsOn
                                 )
-                                    .frame(height: UIScreen.main.bounds.height)
+                                .frame(height: UIScreen.main.bounds.height)
                             }
                         }
                     }
-                    .onChange(of: cycleCount, perform: { _ in
-                        withAnimation() {
-                            value.scrollTo(cycleCount, anchor: .top)
-                            if slots.last!.id < cycleCount {
+                    .onChange(of: cycleCount) { _ in
+                        value.scrollTo(cycleCount, anchor: .top)
+                        if slots.last!.id < cycleCount {
+                            withAnimation(.easeInOut(duration: 0.5)) {
                                 showFinishView.toggle()
-                                settingsIsHidden.toggle()
+                                setupIsHidden.toggle()
                             }
                         }
-                    })
+                    }
                     .ignoresSafeArea()
                     .disabled(true)
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.5)) {
-                            settingsIsHidden.toggle()
+                            setupIsHidden.toggle()
                         }
                     }
                 }

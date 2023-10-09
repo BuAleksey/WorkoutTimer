@@ -1,5 +1,5 @@
 //
-//  SettingsView.swift
+//  SetupWorkoutView.swift
 //  WorkoutTimer
 //
 //  Created by Buba on 17.09.2023.
@@ -10,8 +10,8 @@ import SwiftUI
 struct SetupWorkoutView: View {
     @Binding var slots: [Slot]
     @Binding var roundsCount: Int
-    @Binding var cycleCount: Int
-    @Binding var settingsIsHidden: Bool
+    @Binding var setupIsHidden: Bool
+    @Binding var soundIsOn: Bool
     
     @State private var traningTimeInMinutes = 0
     @State private var traningTimeInSeconds = 0
@@ -20,6 +20,7 @@ struct SetupWorkoutView: View {
     @State private var restTimeInSeconds = 0
     
     @State private var hintIsShow = false
+    @State private var settingsIsShow = false
     
     private var trainingTimeCount: Int {
         traningTimeInMinutes * 60 + traningTimeInSeconds
@@ -30,6 +31,21 @@ struct SetupWorkoutView: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Spacer()
+                Image(systemName: "gear")
+                    .font(.title)
+                    .foregroundColor(Color("ActionColor"))
+                    .onTapGesture {
+                        settingsIsShow.toggle()
+                    }
+                    .sheet(isPresented: $settingsIsShow, content: {
+                        SettingsView(
+                            viewIsVisible: $settingsIsShow,
+                            soundIsOn: $soundIsOn
+                        )
+                    })
+            }
             Spacer()
             Text("LET'S START TAINING")
                 .foregroundColor(Color("ActionColor"))
@@ -101,6 +117,7 @@ struct SetupWorkoutView: View {
             }
             Spacer()
         }
+        .padding()
     }
     
     private func startTraining() {
@@ -112,14 +129,14 @@ struct SetupWorkoutView: View {
         if !slots.isEmpty {
             UIApplication.shared.isIdleTimerDisabled = true
             withAnimation {
-                settingsIsHidden.toggle()
+                setupIsHidden.toggle()
             }
         } else {
             withAnimation {
                 hintIsShow = true
             }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    withAnimation {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                withAnimation {
                     hintIsShow = false
                 }
             }
@@ -132,8 +149,8 @@ struct SettingsView_Previews: PreviewProvider {
         SetupWorkoutView(
             slots: .constant(Slot.defaultSlots),
             roundsCount: .constant(3),
-            cycleCount: .constant(1),
-            settingsIsHidden: .constant(false)
+            setupIsHidden: .constant(false),
+            soundIsOn: .constant(true)
         )
     }
 }

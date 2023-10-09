@@ -24,6 +24,11 @@ final class TimerCounter: ObservableObject {
         )
     }
     
+    func cancelTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
     @objc private func updateTimer() {
         if secondsCount > 0 {
             secondsCount -= 1
