@@ -8,9 +8,12 @@
 import SwiftUI
 import Combine
 
-final class TimerCounter: ObservableObject {    
+final class TimerCounter: ObservableObject {
     @Published var secondsCount = 0
     @Published var timerIsFinished = true
+    @Published var lastThreeSeconds = false
+    
+    private lazy var totalSeconds: Int = { secondsCount }()
     
     private var timer: Timer?
     
@@ -32,6 +35,9 @@ final class TimerCounter: ObservableObject {
     @objc private func updateTimer() {
         if secondsCount > 0 {
             secondsCount -= 1
+            if secondsCount < 3 {
+                lastThreeSeconds.toggle()
+            }
         } else {
             timer?.invalidate()
             timer = nil

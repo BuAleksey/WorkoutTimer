@@ -11,12 +11,12 @@ struct TimerView: View {
     @Binding var slot: Slot
     @Binding var cycle: Int
     @Binding var setupIsHidden: Bool
-    @Binding var sounIsOn: Bool
     
-    @State private var shake = false
     @State private var blink = false
     
     @ObservedObject private var timer = TimerCounter()
+    
+    var sounIsOn: Bool
     
     private let timePresent = TimePresent()
     private let sounManager = SoundManager()
@@ -25,11 +25,9 @@ struct TimerView: View {
         ZStack {
             Color(slot.option == .traning ? "ActionColor" : "AccentColor")
                 .ignoresSafeArea()
-            if slot.option == .traning {
-                EmojiAnimationView()
-            }
+            
             VStack {
-                Text(slot.option == .traning ? "MOVE" : "RELAX")
+                Text(slot.option == .traning ? "" : "RELAX")
                     .foregroundColor(slot.option == .traning ? .accentColor : .white)
                     .font(.system(size: 50, weight: .bold, design: .rounded))
                     .opacity(blink ? 0.2 : 1)
@@ -79,7 +77,7 @@ struct TimerView_Previews: PreviewProvider {
             slot: .constant(.defaultSlot),
             cycle: .constant(1),
             setupIsHidden: .constant(true),
-            sounIsOn: .constant(true)
+            sounIsOn: true
         )
     }
 }

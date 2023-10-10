@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var slots = Slot.defaultSlots
+    @State private var workout = Workout.defaultWorkout
     @State private var roundsCount = 5
     @State private var cycleCount = 1
     @State private var setupIsHidden = false
@@ -24,7 +24,7 @@ struct MainView: View {
                     .transition(.move(edge: .bottom))
             } else if !setupIsHidden {
                 SetupWorkoutView(
-                    slots: $slots,
+                    workout: $workout,
                     roundsCount: $roundsCount,
                     setupIsHidden: $setupIsHidden,
                     soundIsOn: $soundIsOn
@@ -34,21 +34,21 @@ struct MainView: View {
                 ScrollViewReader { value in
                     ScrollView(showsIndicators: false) {
                         LazyVStack {
-                            ForEach($slots) { slot in
+                            ForEach($workout.slots) { slot in
                                 TimerView(
                                     slot: slot,
                                     cycle: $cycleCount,
                                     setupIsHidden: $setupIsHidden,
-                                    sounIsOn: $soundIsOn
+                                    sounIsOn: soundIsOn
                                 )
                                 .frame(height: UIScreen.main.bounds.height)
                             }
                         }
                     }
                     .onChange(of: cycleCount) { _ in
-                        value.scrollTo(cycleCount, anchor: .top)
-                        if slots.last!.id < cycleCount {
-                            withAnimation(.easeInOut(duration: 0.5)) {
+                        withAnimation {
+                            value.scrollTo(cycleCount, anchor: .top)
+                            if workout.slots.last!.id < cycleCount {
                                 showFinishView.toggle()
                                 setupIsHidden.toggle()
                             }
@@ -57,7 +57,7 @@ struct MainView: View {
                     .ignoresSafeArea()
                     .disabled(true)
                     .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.5)) {
+                        withAnimation(.linear(duration: 0.5)) {
                             setupIsHidden.toggle()
                         }
                     }

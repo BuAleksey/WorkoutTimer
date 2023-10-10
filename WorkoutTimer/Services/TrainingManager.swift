@@ -8,10 +8,10 @@
 import Foundation
 
 final class TrainingManager {
-    func createWorkout(roundsCount: Int, trainingTimeCount: Int, resrTimeCount: Int) -> [Slot] {
+    func createWorkout(roundsCount: Int, trainingTimeCount: Int, resrTimeCount: Int) -> Workout? {
         var id = 0
         var slots: [Slot] = []
-        guard trainingTimeCount != 0 else { return slots }
+        guard trainingTimeCount != 0 else { return nil }
         for round in 1...roundsCount {
             if round != roundsCount {
                 id += 1
@@ -43,6 +43,7 @@ final class TrainingManager {
                 )
             }
         }
-        return slots
+        let workout = Workout(slots: slots)
+        return workout
     }
 }

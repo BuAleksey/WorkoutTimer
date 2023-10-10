@@ -20,7 +20,7 @@ struct SelectionView: View {
             }
         }
         .pickerStyle(WheelPickerStyle())
-        .frame(width: 70, height: 100)
+        .frame(width: 70, height: 80)
         .clipped()
     }
 }
@@ -34,8 +34,8 @@ struct SelectionView_Previews: PreviewProvider {
 extension UIPickerView {
     open override var intrinsicContentSize: CGSize {
         return CGSize(
-            width: UIView.noIntrinsicMetric ,
-            height: super.intrinsicContentSize.height
+            width: UIView.noIntrinsicMetric,
+            height: UIView.noIntrinsicMetric
         )
     }
 }
