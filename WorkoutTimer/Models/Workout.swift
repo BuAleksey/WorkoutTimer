@@ -30,6 +30,7 @@ struct Slot: Identifiable {
 }
 
 enum Option {
+    case prepare
     case traning
     case rase
 }

@@ -9,9 +9,11 @@ import Foundation
 
 final class TrainingManager {
     func createWorkout(roundsCount: Int, trainingTimeCount: Int, resrTimeCount: Int) -> Workout? {
-        var id = 0
+        var id = 1
         var slots: [Slot] = []
         guard trainingTimeCount != 0 else { return nil }
+        let prepareSlot = Slot(id: id, time: 10, option: .prepare)
+        slots.append(prepareSlot)
         for round in 1...roundsCount {
             if round != roundsCount {
                 id += 1

@@ -23,11 +23,11 @@ struct TimerView: View {
     
     var body: some View {
         ZStack {
-            Color(slot.option == .traning ? "ActionColor" : "AccentColor")
+            setupBackgroundColor(for: slot.option)
                 .ignoresSafeArea()
             
             VStack {
-                Text(slot.option == .traning ? "" : "RELAX")
+                Text(setupTitel(for: slot.option))
                     .foregroundColor(slot.option == .traning ? .accentColor : .white)
                     .font(.system(size: 50, weight: .bold, design: .rounded))
                     .opacity(blink ? 0.2 : 1)
@@ -55,6 +55,11 @@ struct TimerView: View {
                     if timer.secondsCount == 0 {
                         cycle += 1
                     }
+                    if slot.option == .prepare {
+                        withAnimation(.easeIn(duration: 0.3)) {
+                            blink.toggle()
+                        }
+                    }
                     if slot.option == .rase {
                         withAnimation(.easeIn(duration: 1)) {
                             blink.toggle()
@@ -79,5 +84,30 @@ struct TimerView_Previews: PreviewProvider {
             setupIsHidden: .constant(true),
             sounIsOn: true
         )
+    }
+}
+
+// MARK: - Private metods
+extension TimerView {
+    private func setupBackgroundColor(for slot: Option) -> Color {
+        switch slot {
+        case .prepare:
+            return Color("PrepearColor")
+        case .traning:
+            return Color("ActionColor")
+        case .rase:
+            return Color("AccentColor")
+        }
+    }
+    
+    private func setupTitel(for slot: Option) -> String {
+        switch slot {
+        case .prepare:
+            return "PREPEAR"
+        case .traning:
+            return ""
+        case .rase:
+            return "RELAX"
+        }
     }
 }
