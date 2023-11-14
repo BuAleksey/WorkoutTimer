@@ -9,19 +9,19 @@ import SwiftUI
 
 struct FinishView: View {
     @Binding var viewIsVisibly: Bool
-    @State private var text = "FINISH"
+    @State private var textTitle = "FINISH"
     
     var body: some View {
         ZStack {
             Color.accentColor
                 .ignoresSafeArea()
-            Text(text)
+            Text(textTitle)
                 .foregroundColor(Color("ActionColor"))
                 .font(.system(size: 40, weight: .bold, design: .rounded))
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         withAnimation {
-                            text = "IT'S AMAZING"
+                            textTitle = "IT'S AMAZING"
                         }
                     }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 4) {

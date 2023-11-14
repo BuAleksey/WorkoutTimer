@@ -9,6 +9,8 @@ import SwiftUI
 import Combine
 
 final class TimerCounter: ObservableObject {
+    static let shared = TimerCounter()
+    
     @Published var secondsCount = 0
     @Published var timerIsFinished = true
     @Published var lastThreeSeconds = false
@@ -16,6 +18,8 @@ final class TimerCounter: ObservableObject {
     private lazy var totalSeconds: Int = { secondsCount }()
     
     private var timer: Timer?
+    
+    private init() {}
     
     func startTimer() {
         timer = Timer.scheduledTimer(

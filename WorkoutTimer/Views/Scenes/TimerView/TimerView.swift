@@ -10,15 +10,14 @@ import SwiftUI
 struct TimerView: View {
     @Binding var slot: Slot
     @Binding var cycle: Int
-    @Binding var setupIsHidden: Bool
     
     @State private var blink = false
     
-    @ObservedObject private var timer = TimerCounter()
+    @ObservedObject private var timer = TimerCounter.shared
     
     var sounIsOn: Bool
     
-    private let timePresent = TimePresent()
+    private let timePresent = TimePresent.shared
     private let sounManager = SoundManager()
     
     var body: some View {
@@ -81,7 +80,6 @@ struct TimerView_Previews: PreviewProvider {
         TimerView(
             slot: .constant(.defaultSlot),
             cycle: .constant(1),
-            setupIsHidden: .constant(true),
             sounIsOn: true
         )
     }

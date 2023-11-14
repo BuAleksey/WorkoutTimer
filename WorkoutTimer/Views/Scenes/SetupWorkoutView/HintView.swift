@@ -13,7 +13,7 @@ struct HintView: View {
             Image(systemName: "exclamationmark.triangle.fill")
                 .font(.system(size: 15))
                 .foregroundColor(.yellow)
-            Text("Set time of training")
+            Text("Set time of work")
                 .foregroundColor(.white)
                 .font(.system(size: 15, design: .rounded))
         }

@@ -12,7 +12,7 @@ struct SelectionView: View {
     var range = 1...100
     
     var body: some View {
-        Picker("Rounds count", selection: $choiceNumber) {
+        Picker("Number of rounds", selection: $choiceNumber) {
             ForEach(range, id: \.self) { number in
                 Text(number.formatted())
                     .foregroundColor(Color("ActionColor"))

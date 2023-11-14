@@ -11,14 +11,15 @@
 		870DE31E2AB19AC900146F59 /* SelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DE31D2AB19AC900146F59 /* SelectionView.swift */; };
 		870DE3202AB1A94300146F59 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DE31F2AB1A94300146F59 /* TimerView.swift */; };
 		8720D1D22AC176D3005C8AE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8720D1D12AC176D3005C8AE2 /* LaunchScreen.storyboard */; };
-		8720D1D42AC17B63005C8AE2 /* training.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8720D1D32AC17B63005C8AE2 /* training.mp3 */; };
+		8720D1D42AC17B63005C8AE2 /* work.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8720D1D32AC17B63005C8AE2 /* work.mp3 */; };
+		8731DBEB2B0394D300AFAA24 /* FavoriteWorkoutCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8731DBEA2B0394D300AFAA24 /* FavoriteWorkoutCard.swift */; };
 		875FD5E92B03665600AD8BE2 /* VertycallyCapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875FD5E82B03665600AD8BE2 /* VertycallyCapView.swift */; };
 		876A85A62AD688BE0006B247 /* SettingsBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876A85A52AD688BE0006B247 /* SettingsBtnView.swift */; };
-		876A85AB2AD68B240006B247 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876A85AA2AD68B240006B247 /* FavoriteView.swift */; };
+		876A85AB2AD68B240006B247 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876A85AA2AD68B240006B247 /* FavoritesView.swift */; };
 		876A85AD2AD68B330006B247 /* FavoriteBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876A85AC2AD68B330006B247 /* FavoriteBtnView.swift */; };
 		876A85AF2AD68E130006B247 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876A85AE2AD68E130006B247 /* DataManager.swift */; };
 		876A85B12AD68FBA0006B247 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876A85B02AD68FBA0006B247 /* Workout.swift */; };
-		876F6E1C2ABC2E5E00E00CBB /* TrainingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876F6E1B2ABC2E5E00E00CBB /* TrainingManager.swift */; };
+		876F6E1C2ABC2E5E00E00CBB /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876F6E1B2ABC2E5E00E00CBB /* WorkoutManager.swift */; };
 		876F6E232ABC73E100E00CBB /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876F6E222ABC73E100E00CBB /* SoundManager.swift */; };
 		878BF8682ABB13C8006FD876 /* HintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878BF8672ABB13C8006FD876 /* HintView.swift */; };
 		879483C32AB6BEE3008A2925 /* FinishView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879483C22AB6BEE3008A2925 /* FinishView.swift */; };
@@ -58,14 +59,15 @@
 		870DE31D2AB19AC900146F59 /* SelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionView.swift; sourceTree = "<group>"; };
 		870DE31F2AB1A94300146F59 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		8720D1D12AC176D3005C8AE2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8720D1D32AC17B63005C8AE2 /* training.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = training.mp3; sourceTree = "<group>"; };
+		8720D1D32AC17B63005C8AE2 /* work.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = work.mp3; sourceTree = "<group>"; };
+		8731DBEA2B0394D300AFAA24 /* FavoriteWorkoutCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteWorkoutCard.swift; sourceTree = "<group>"; };
 		875FD5E82B03665600AD8BE2 /* VertycallyCapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertycallyCapView.swift; sourceTree = "<group>"; };
 		876A85A52AD688BE0006B247 /* SettingsBtnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBtnView.swift; sourceTree = "<group>"; };
-		876A85AA2AD68B240006B247 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		876A85AA2AD68B240006B247 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		876A85AC2AD68B330006B247 /* FavoriteBtnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBtnView.swift; sourceTree = "<group>"; };
 		876A85AE2AD68E130006B247 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		876A85B02AD68FBA0006B247 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
-		876F6E1B2ABC2E5E00E00CBB /* TrainingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingManager.swift; sourceTree = "<group>"; };
+		876F6E1B2ABC2E5E00E00CBB /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
 		876F6E222ABC73E100E00CBB /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		878BF8672ABB13C8006FD876 /* HintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintView.swift; sourceTree = "<group>"; };
 		879483C22AB6BEE3008A2925 /* FinishView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishView.swift; sourceTree = "<group>"; };
@@ -141,7 +143,8 @@
 		876A85A92AD68AFD0006B247 /* FavoriteView */ = {
 			isa = PBXGroup;
 			children = (
-				876A85AA2AD68B240006B247 /* FavoriteView.swift */,
+				876A85AA2AD68B240006B247 /* FavoritesView.swift */,
+				8731DBEA2B0394D300AFAA24 /* FavoriteWorkoutCard.swift */,
 				876A85AC2AD68B330006B247 /* FavoriteBtnView.swift */,
 				87DA0B9F2B02337F00407B28 /* AddToFavoriteBtn.swift */,
 			);
@@ -188,7 +191,7 @@
 		876F6E1D2ABC6D3C00E00CBB /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				8720D1D32AC17B63005C8AE2 /* training.mp3 */,
+				8720D1D32AC17B63005C8AE2 /* work.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -196,7 +199,7 @@
 		878776C92AD3DA5200B2FDC7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				876F6E1B2ABC2E5E00E00CBB /* TrainingManager.swift */,
+				876F6E1B2ABC2E5E00E00CBB /* WorkoutManager.swift */,
 				876F6E222ABC73E100E00CBB /* SoundManager.swift */,
 				870DE31B2AAF0D4800146F59 /* TimerCounter.swift */,
 				876A85AE2AD68E130006B247 /* DataManager.swift */,
@@ -393,7 +396,7 @@
 				879CE4312AAC4D7600822FEB /* Preview Assets.xcassets in Resources */,
 				8720D1D22AC176D3005C8AE2 /* LaunchScreen.storyboard in Resources */,
 				879CE42E2AAC4D7600822FEB /* Assets.xcassets in Resources */,
-				8720D1D42AC17B63005C8AE2 /* training.mp3 in Resources */,
+				8720D1D42AC17B63005C8AE2 /* work.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,15 +422,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				87FAA4BC2ABAD0D40077E4AB /* TimePresent.swift in Sources */,
+				8731DBEB2B0394D300AFAA24 /* FavoriteWorkoutCard.swift in Sources */,
 				875FD5E92B03665600AD8BE2 /* VertycallyCapView.swift in Sources */,
 				878BF8682ABB13C8006FD876 /* HintView.swift in Sources */,
-				876F6E1C2ABC2E5E00E00CBB /* TrainingManager.swift in Sources */,
+				876F6E1C2ABC2E5E00E00CBB /* WorkoutManager.swift in Sources */,
 				870DE3202AB1A94300146F59 /* TimerView.swift in Sources */,
 				879483C72AB6C962008A2925 /* SetupWorkoutView.swift in Sources */,
 				876F6E232ABC73E100E00CBB /* SoundManager.swift in Sources */,
 				879CE42C2AAC4D7400822FEB /* MainView.swift in Sources */,
 				876A85AF2AD68E130006B247 /* DataManager.swift in Sources */,
-				876A85AB2AD68B240006B247 /* FavoriteView.swift in Sources */,
+				876A85AB2AD68B240006B247 /* FavoritesView.swift in Sources */,
 				879CE42A2AAC4D7400822FEB /* WorkoutTimerApp.swift in Sources */,
 				876A85A62AD688BE0006B247 /* SettingsBtnView.swift in Sources */,
 				870DE31C2AAF0D4800146F59 /* TimerCounter.swift in Sources */,

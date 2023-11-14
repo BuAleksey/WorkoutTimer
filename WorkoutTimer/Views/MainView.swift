@@ -9,9 +9,9 @@ import SwiftUI
 
 struct MainView: View {
     @State private var workout = Workout.defaultWorkout
-    @State private var roundsCount = 5
-    @State private var cycleCount = 1
-    @State private var setupIsHidden = false
+    @State private var numberOfRounds = 5
+    @State private var cycleNumber = 1
+    @State private var setupWorkoutViewIsHidden = false
     @State private var showFinishView = false
     @State private var soundIsOn = true
     
@@ -22,11 +22,11 @@ struct MainView: View {
             if showFinishView {
                 FinishView(viewIsVisibly: $showFinishView)
                     .transition(.move(edge: .bottom))
-            } else if !setupIsHidden {
+            } else if !setupWorkoutViewIsHidden {
                 SetupWorkoutView(
                     workout: $workout,
-                    roundsCount: $roundsCount,
-                    setupIsHidden: $setupIsHidden,
+                    numberOfRounds: $numberOfRounds,
+                    viewIsVisible: $setupWorkoutViewIsHidden,
                     soundIsOn: $soundIsOn
                 )
                 .transition(.move(edge: .bottom))
@@ -37,20 +37,19 @@ struct MainView: View {
                             ForEach($workout.slots) { slot in
                                 TimerView(
                                     slot: slot,
-                                    cycle: $cycleCount,
-                                    setupIsHidden: $setupIsHidden,
+                                    cycle: $cycleNumber,
                                     sounIsOn: soundIsOn
                                 )
                                 .frame(height: UIScreen.main.bounds.height)
                             }
                         }
                     }
-                    .onChange(of: cycleCount) { _ in
+                    .onChange(of: cycleNumber) { _ in
                         withAnimation {
-                            value.scrollTo(cycleCount, anchor: .top)
-                            if workout.slots.last!.id < cycleCount {
+                            value.scrollTo(cycleNumber, anchor: .top)
+                            if workout.slots.last!.id < cycleNumber {
                                 showFinishView.toggle()
-                                setupIsHidden.toggle()
+                                setupWorkoutViewIsHidden.toggle()
                             }
                         }
                     }
@@ -58,7 +57,7 @@ struct MainView: View {
                     .disabled(true)
                     .onTapGesture {
                         withAnimation(.linear(duration: 0.5)) {
-                            setupIsHidden.toggle()
+                            setupWorkoutViewIsHidden.toggle()
                         }
                     }
                 }

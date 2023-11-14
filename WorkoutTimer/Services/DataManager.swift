@@ -9,19 +9,19 @@ import Foundation
 
 final class DataManager {
     static let shared = DataManager()
-    var favoriteWorkout: [Workout] = []
+    var favoriteWorkouts: [Workout] = []
     
     private init() {}
     
-    func addFavoriteWorkout(_ workout: Workout) {
-        if !favoriteWorkout.contains(workout) {
-            favoriteWorkout.append(workout)
+    func addWorkoutToFavorites(_ workout: Workout) {
+        if !favoriteWorkouts.contains(workout) {
+            favoriteWorkouts.append(workout)
         }
     }
     
-    func removeFavoriteWorkout(_ workout: Workout) {
-        if let index = favoriteWorkout.firstIndex(where: { $0.id == workout.id }) {
-            favoriteWorkout.remove(at: index)
+    func removeWorkoutFromFavorites(_ workout: Workout) {
+        if let index = favoriteWorkouts.firstIndex(where: { $0.id == workout.id }) {
+            favoriteWorkouts.remove(at: index)
         }
     }
 }

@@ -8,6 +8,10 @@
 import Foundation
 
 final class TimePresent {
+    static let shared = TimePresent()
+    
+    private init() {}
+    
     func getMinString(sec: Int) -> String {
         let min = sec / 60
         return String(min)

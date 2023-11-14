@@ -10,7 +10,7 @@ import AVFoundation
 
 final class SoundManager {
     private var audioPlayer: AVAudioPlayer!
-    private let urlTrainingSound = Bundle.main.url(forResource: "training", withExtension: "mp3")!
+    private let urlTrainingSound = Bundle.main.url(forResource: "work", withExtension: "mp3")!
     
     private func prepearToPlay(url: URL) {
         do {
