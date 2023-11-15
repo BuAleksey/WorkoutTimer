@@ -16,6 +16,7 @@ struct TimerView: View {
     @ObservedObject private var timer = TimerCounter.shared
     
     var sounIsOn: Bool
+    var numberOsRounds: Int
     
     private let timePresent = TimePresent.shared
     private let sounManager = SoundManager()
@@ -26,9 +27,18 @@ struct TimerView: View {
                 .ignoresSafeArea()
             
             VStack {
+                if slot.option == .work || slot.option == .rest {
+                    HStack {
+                        Spacer()
+                        Text("\(cycle - 1) / \(numberOsRounds)")
+                            .foregroundColor(Color("PrepearColor"))
+                            .font(.system(size: 30, weight: .bold, design: .rounded))
+                    }
+                }
                 Text(setupTitel(for: slot.option))
                     .foregroundColor(slot.option == .work ? .accentColor : .white)
                     .font(.system(size: 50, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.center)
                     .opacity(blink ? 0.2 : 1)
                     .shadow(color: .accentColor, radius: 3, x: 3, y: 3)
                     .offset(y: 130)
@@ -46,8 +56,8 @@ struct TimerView: View {
                 .onAppear {
                     timer.secondsCount = slot.time
                     timer.startTimer()
-                    if sounIsOn {
-                        sounManager.playTrainingSound()
+                    if sounIsOn, slot.option == .work {
+                        sounManager.playWorkSound()
                     }
                 }
                 .onChange(of: timer.secondsCount) { _ in
@@ -59,14 +69,14 @@ struct TimerView: View {
                             blink.toggle()
                         }
                     }
-                    if slot.option == .rase {
+                    if slot.option == .rest {
                         withAnimation(.easeIn(duration: 1)) {
                             blink.toggle()
                         }
                     }
                 }
                 .onDisappear {
-                    timer.cancelTimer()
+                    TimerCounter.shared.cancelTimer()
                 }
                 Spacer()
             }
@@ -80,7 +90,8 @@ struct TimerView_Previews: PreviewProvider {
         TimerView(
             slot: .constant(.defaultSlot),
             cycle: .constant(1),
-            sounIsOn: true
+            sounIsOn: true,
+            numberOsRounds: 5
         )
     }
 }
@@ -93,8 +104,11 @@ extension TimerView {
             return Color("PrepearColor")
         case .work:
             return Color("ActionColor")
-        case .rase:
+        case .rest:
             return Color("AccentColor")
+        case .finish:
+            return Color("FinishColor")
+            
         }
     }
     
@@ -104,8 +118,13 @@ extension TimerView {
             return "PREPEAR"
         case .work:
             return ""
-        case .rase:
+        case .rest:
             return "RELAX"
+        case .finish:
+            return """
+                   FINISH
+                   IT'S AMAZING!
+                   """
         }
     }
 }

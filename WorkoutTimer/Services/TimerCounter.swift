@@ -34,7 +34,6 @@ final class TimerCounter: ObservableObject {
     func cancelTimer() {
         timer?.invalidate()
         timer = nil
-        print("kill")
     }
     
     @objc private func updateTimer() {
@@ -48,5 +47,9 @@ final class TimerCounter: ObservableObject {
             timer = nil
             timerIsFinished.toggle()
         }
+    }
+    
+    deinit {
+        print("deinit")
     }
 }

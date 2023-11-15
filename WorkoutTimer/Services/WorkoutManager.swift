@@ -34,7 +34,7 @@ final class WorkoutManager {
                         Slot(
                             id: id,
                             time: raseTimeCount,
-                            option: .rase
+                            option: .rest
                         )
                     )
                 }
@@ -49,6 +49,11 @@ final class WorkoutManager {
                 )
             }
         }
+        
+        id += 1
+        let finishSlot = Slot(id: id, time: 3, option: .finish)
+        slots.append(finishSlot)
+        
         let workout = Workout(slots: slots)
         return workout
     }

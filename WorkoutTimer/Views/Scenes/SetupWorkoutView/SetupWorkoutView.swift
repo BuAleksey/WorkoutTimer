@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct SetupWorkoutView: View {
-    @Binding var workout: Workout
-    @Binding var numberOfRounds: Int
-    @Binding var viewIsVisible: Bool
-    @Binding var soundIsOn: Bool
-        
-    @State private var workTimeMinutes = 0
-    @State private var workTimeSeconds = 0
+    @State private var workout = Workout.defaultWorkout
+    @State private var numberOfRounds = 3
+    @State private var soundIsOn = true
     
-    @State private var restTimeMinutes = 0
-    @State private var restTimeSeconds = 0
+    @State private var favoritesViewIsShow = false
+    @State private var settingsIsShow = false
     
     @State private var hintIsShow = false
-    @State private var settingsIsShow = false
     @State private var showAddToFavoritesBtn = false
-    @State private var favoritesViewIsShow = false
+    @State private var navigationLinkIsActive = false
+    
+    @State private var workTimeMinutes = 0
+    @State private var workTimeSeconds = 0
+    @State private var restTimeMinutes = 0
+    @State private var restTimeSeconds = 0
     
     private var workTimeCount: Int {
         workTimeMinutes * 60 + workTimeSeconds
@@ -38,84 +38,62 @@ struct SetupWorkoutView: View {
                     .onTapGesture {
                         favoritesViewIsShow.toggle()
                     }
-                    .sheet(isPresented: $favoritesViewIsShow,
-                           content: {
-                        FavoritesView(
-                            setupWorkoutViewIsHidden: $viewIsVisible,
-                            viewIsVisible: $favoritesViewIsShow,
-                            workout: $workout
-                        )
-                    })
+                    .sheet(
+                        isPresented: $favoritesViewIsShow,
+                        content: {
+                            FavoritesView(
+                                viewIsVisible: $favoritesViewIsShow,
+                                workout: $workout
+                            )
+                        }
+                    )
+                
                 Spacer()
+                
                 SettingsBtnView()
                     .onTapGesture {
                         settingsIsShow.toggle()
                     }
-                    .sheet(isPresented: $settingsIsShow, content: {
-                        SettingsView(
-                            viewIsVisible: $settingsIsShow,
-                            soundIsOn: $soundIsOn
-                        )
-                    })
+                    .sheet(
+                        isPresented: $settingsIsShow,
+                        content: {
+                            SettingsView(
+                                viewIsVisible: $settingsIsShow,
+                                soundIsOn: $soundIsOn
+                            )
+                        }
+                    )
             }
+            
             Spacer()
+            
             Text("LET'S START WORKOUT")
                 .foregroundColor(Color("ActionColor"))
                 .font(.system(size: 30, weight: .bold, design: .rounded))
             Spacer()
-                HStack(spacing: -3) {
-                    VStack(spacing: 8) {
-                        Text("ROUNDS")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
-                        SelectionView(choiceNumber: $numberOfRounds)
-                    }
-                    VStack {
-                        Text("WORK")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
-                        VStack(spacing: -10) {
-                            HStack(spacing: 32) {
-                                Text("min")
-                                Text("sec")
-                            }
-                            .font(.system(size: 15, weight: .light, design: .rounded))
-                            HStack(spacing: -15) {
-                                SelectionView(
-                                    choiceNumber: $workTimeMinutes,
-                                    range: 0...60
-                                )
-                                SelectionView(
-                                    choiceNumber: $workTimeSeconds,
-                                    range: 0...60
-                                )
-                            }
-                        }
-                    }
-                    .onChange(of: workTimeCount) { _ in
-                        showAddToFavoritesBtn = true
-                    }
-                    
-                    VStack {
-                        Text("REST")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
-                        VStack(spacing: -10) {
-                            HStack(spacing: 32) {
-                                Text("min")
-                                Text("sec")
-                            }
-                            .font(.system(size: 15, weight: .light, design: .rounded))
-                            HStack(spacing: -15) {
-                                SelectionView(
-                                    choiceNumber: $restTimeMinutes,
-                                    range: 0...60)
-                                SelectionView(
-                                    choiceNumber: $restTimeSeconds,
-                                    range: 0...60)
-                            }
-                    }
+            HStack(spacing: -3) {
+                VStack(spacing: 8) {
+                    Text("ROUNDS")
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                    PickerView(choiceNumber: $numberOfRounds)
                 }
-                    .onChange(of: restTimeCount) { _ in
-                        showAddToFavoritesBtn = true
-                    }
+                SelectionView(
+                    timeMinutes: $workTimeMinutes,
+                    timeSeconds: $workTimeSeconds,
+                    title: "WORK"
+                )
+                .onChange(of: workTimeCount) { _ in
+                    showAddToFavoritesBtn = true
+                }
+                
+                SelectionView(
+                    timeMinutes: $restTimeMinutes,
+                    timeSeconds: $restTimeSeconds,
+                    title: "REST"
+                )
+                .onChange(of: restTimeCount) { _ in
+                    showAddToFavoritesBtn = true
+                }
             }
             .foregroundColor(Color("ActionColor"))
             
@@ -150,6 +128,17 @@ struct SetupWorkoutView: View {
                         .font(.system(size: 25, weight: .bold, design: .rounded))
                 }
             }
+            
+            NavigationLink("", isActive: $navigationLinkIsActive) {
+                TimerScrollView(
+                    workout: $workout,
+                    soundIsOn: $soundIsOn,
+                    navigationLinkIsActive: $navigationLinkIsActive,
+                    numberOsRounds: numberOfRounds
+                )
+            }
+            .hidden()
+            
             Spacer()
         }
         .padding()
@@ -157,12 +146,7 @@ struct SetupWorkoutView: View {
     
     struct SettingsView_Previews: PreviewProvider {
         static var previews: some View {
-            SetupWorkoutView(
-                workout: .constant(Workout.defaultWorkout),
-                numberOfRounds: .constant(3),
-                viewIsVisible: .constant(false),
-                soundIsOn: .constant(true)
-            )
+            SetupWorkoutView()
         }
     }
 }
@@ -186,7 +170,7 @@ extension SetupWorkoutView {
             return
         }
         self.workout = workout
-        viewIsVisible.toggle()
+        navigationLinkIsActive.toggle()
     }
     
     private func addToFavorites() {

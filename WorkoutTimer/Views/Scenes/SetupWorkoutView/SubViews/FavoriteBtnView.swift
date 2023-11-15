@@ -18,7 +18,11 @@ struct FavoriteBtnView: View {
             .animation(
                 .linear(duration: 1).repeatCount(3),
                 value: scale)
-            .onAppear { scale = 1 }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    scale = 1
+                }
+            }
     }
 }
 

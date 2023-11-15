@@ -20,19 +20,13 @@ struct Slot: Identifiable, Codable {
     let option: Option
     
     static let defaultSlot = Slot(id: 0, time: 5, option: .work)
-    static let defaultSlots = [
-        Slot(id: 0, time: 5, option: .work),
-        Slot(id: 1, time: 3, option: .rase),
-        Slot(id: 2, time: 5, option: .work),
-        Slot(id: 3, time: 3, option: .rase),
-        Slot(id: 4, time: 5, option: .work)
-    ]
 }
 
 enum Option: Codable {
     case prepare
     case work
-    case rase
+    case rest
+    case finish
 }
 
 extension Workout: Equatable {
@@ -40,10 +34,10 @@ extension Workout: Equatable {
         let lhsTrainingTime = lhs.slots.first { $0.option == .work }
         let rhsTrainingTime = rhs.slots.first { $0.option == .work }
         
-        let lhsRaseTime = lhs.slots.first { $0.option == .rase }
-        let rhsRaseTime = rhs.slots.first { $0.option == .rase }
+        let lhsRestTime = lhs.slots.first { $0.option == .rest }
+        let rhsRestTime = rhs.slots.first { $0.option == .rest }
         
-        if lhsTrainingTime?.time == rhsTrainingTime?.time && lhsRaseTime?.time == rhsRaseTime?.time {
+        if lhsTrainingTime?.time == rhsTrainingTime?.time && lhsRestTime?.time == rhsRestTime?.time {
             return true
         } else {
             return false

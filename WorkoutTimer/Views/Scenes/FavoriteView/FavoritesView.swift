@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    @Binding var setupWorkoutViewIsHidden: Bool
     @Binding var viewIsVisible: Bool
     @Binding var workout: Workout
     
@@ -23,36 +22,47 @@ struct FavoritesView: View {
             Color.accentColor
                 .ignoresSafeArea()
             VStack {
-                Text("FAVORITE WORKOUTS")
+                Text(
+                    dataManager.favoriteWorkouts.isEmpty
+                    ? "There are no favorites workouts"
+                    : "FAVORITE WORKOUTS"
+                )
                     .font(.system(size: 20, weight: .bold, design: .rounded))
                     .padding(.bottom, 20)
-                ScrollView {
-                    LazyVGrid(
-                        columns: columns,
-                        content: {
-                            ForEach(dataManager.favoriteWorkouts) { workout in
-                                FavoriteWorkoutCard(
-                                    numberOfRounds: setWorkoutParametrs(workout).numberOfRounds,
-                                    workTime: setWorkoutParametrs(workout).workTime,
-                                    raseTime: setWorkoutParametrs(workout).raseTime,
-                                    action: { showAlert.toggle() }
-                                )
-                                .onTapGesture {
-                                    self.workout = workout
-                                    viewIsVisible.toggle()
-                                    setupWorkoutViewIsHidden.toggle()
-                                }
-                                .alert(
-                                    "Do you want to remove the workout?",
-                                    isPresented: $showAlert) {
-                                        HStack {
-                                            Button("OK", action: { removeWorkout(workout) })
-                                            Button("Cancel", action: {})
-                                        }
+                
+                if dataManager.favoriteWorkouts.isEmpty {
+                    Spacer()
+                    Image("noFavorites")
+                        .resizable()
+                        .frame(width: 200, height: 200)
+                } else {
+                    ScrollView {
+                        LazyVGrid(
+                            columns: columns,
+                            content: {
+                                ForEach(dataManager.favoriteWorkouts) { workout in
+                                    FavoriteWorkoutCard(
+                                        numberOfRounds: setWorkoutParametrs(workout).numberOfRounds,
+                                        workTime: setWorkoutParametrs(workout).workTime,
+                                        raseTime: setWorkoutParametrs(workout).raseTime,
+                                        action: { showAlert.toggle() }
+                                    )
+                                    .onTapGesture {
+                                        self.workout = workout
+                                        viewIsVisible.toggle()
                                     }
+                                    .alert(
+                                        "Do you want to remove the workout?",
+                                        isPresented: $showAlert) {
+                                            HStack {
+                                                Button("OK", action: { removeWorkout(workout) })
+                                                Button("Cancel", action: {})
+                                            }
+                                        }
+                                }
                             }
-                        }
-                    )
+                        )
+                    }
                 }
                 Spacer()
             }
@@ -64,7 +74,6 @@ struct FavoritesView: View {
 
 #Preview {
     FavoritesView(
-        setupWorkoutViewIsHidden: .constant(false),
         viewIsVisible: .constant(true),
         workout: .constant(Workout.defaultWorkout)
     )
@@ -83,7 +92,7 @@ extension FavoritesView {
         let workSec = timePresent.getSecString(sec: workSlot.time)
         parametrs.workTime = "\(workMin):\(workSec)"
         
-        if let raseSlot = workout.slots.first (where: { $0.option == .rase }) {
+        if let raseSlot = workout.slots.first (where: { $0.option == .rest }) {
             let raseMin = timePresent.getMinString(sec: raseSlot.time)
             let raseSec = timePresent.getSecString(sec: raseSlot.time)
             parametrs.raseTime = "\(raseMin):\(raseSec)"

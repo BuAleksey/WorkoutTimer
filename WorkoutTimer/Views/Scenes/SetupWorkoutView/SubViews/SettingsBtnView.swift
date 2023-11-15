@@ -19,9 +19,11 @@ struct SettingsBtnView: View {
                 .linear(duration: 2),
                 value: rotation)
             .onAppear { 
-                rotation = 50
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    rotation = 0
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    rotation = 50
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        rotation = 0
+                    }
                 }
             }
     }

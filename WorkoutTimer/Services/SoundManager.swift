@@ -22,7 +22,7 @@ final class SoundManager {
         }
     }
     
-    func playTrainingSound() {
+    func playWorkSound() {
         prepearToPlay(url: urlTrainingSound)
     }
 }
