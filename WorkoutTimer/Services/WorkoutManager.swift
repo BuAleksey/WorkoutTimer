@@ -25,7 +25,7 @@ final class WorkoutManager {
                     Slot(
                         id: id,
                         time: workTimeCount,
-                        option: .traning
+                        option: .work
                     )
                 )
                 if raseTimeCount > 0 {
@@ -44,7 +44,7 @@ final class WorkoutManager {
                     Slot(
                         id: id,
                         time: workTimeCount,
-                        option: .traning
+                        option: .work
                     )
                 )
             }

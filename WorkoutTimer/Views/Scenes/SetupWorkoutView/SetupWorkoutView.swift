@@ -12,9 +12,7 @@ struct SetupWorkoutView: View {
     @Binding var numberOfRounds: Int
     @Binding var viewIsVisible: Bool
     @Binding var soundIsOn: Bool
-    
-    @State private var selectedFavoriteWorkout = Workout.defaultWorkout
-    
+        
     @State private var workTimeMinutes = 0
     @State private var workTimeSeconds = 0
     
@@ -40,10 +38,12 @@ struct SetupWorkoutView: View {
                     .onTapGesture {
                         favoritesViewIsShow.toggle()
                     }
-                    .sheet(isPresented: $favoritesViewIsShow, content: {
+                    .sheet(isPresented: $favoritesViewIsShow,
+                           content: {
                         FavoritesView(
+                            setupWorkoutViewIsHidden: $viewIsVisible,
                             viewIsVisible: $favoritesViewIsShow,
-                            choice: $selectedFavoriteWorkout
+                            workout: $workout
                         )
                     })
                 Spacer()

@@ -7,38 +7,38 @@
 
 import Foundation
 
-struct Workout: Identifiable {
-    let id = UUID()
+struct Workout: Identifiable, Codable {
+    var id = UUID()
     var slots: [Slot]
     
     static let defaultWorkout = Workout(slots: [Slot.defaultSlot])
 }
 
-struct Slot: Identifiable {
+struct Slot: Identifiable, Codable {
     let id: Int
     let time: Int
     let option: Option
     
-    static let defaultSlot = Slot(id: 0, time: 5, option: .traning)
+    static let defaultSlot = Slot(id: 0, time: 5, option: .work)
     static let defaultSlots = [
-        Slot(id: 0, time: 5, option: .traning),
+        Slot(id: 0, time: 5, option: .work),
         Slot(id: 1, time: 3, option: .rase),
-        Slot(id: 2, time: 5, option: .traning),
+        Slot(id: 2, time: 5, option: .work),
         Slot(id: 3, time: 3, option: .rase),
-        Slot(id: 4, time: 5, option: .traning)
+        Slot(id: 4, time: 5, option: .work)
     ]
 }
 
-enum Option {
+enum Option: Codable {
     case prepare
-    case traning
+    case work
     case rase
 }
 
 extension Workout: Equatable {
     static func == (lhs: Workout, rhs: Workout) -> Bool {
-        let lhsTrainingTime = lhs.slots.first { $0.option == .traning }
-        let rhsTrainingTime = rhs.slots.first { $0.option == .traning }
+        let lhsTrainingTime = lhs.slots.first { $0.option == .work }
+        let rhsTrainingTime = rhs.slots.first { $0.option == .work }
         
         let lhsRaseTime = lhs.slots.first { $0.option == .rase }
         let rhsRaseTime = rhs.slots.first { $0.option == .rase }

@@ -27,7 +27,7 @@ struct TimerView: View {
             
             VStack {
                 Text(setupTitel(for: slot.option))
-                    .foregroundColor(slot.option == .traning ? .accentColor : .white)
+                    .foregroundColor(slot.option == .work ? .accentColor : .white)
                     .font(.system(size: 50, weight: .bold, design: .rounded))
                     .opacity(blink ? 0.2 : 1)
                     .shadow(color: .accentColor, radius: 3, x: 3, y: 3)
@@ -41,7 +41,7 @@ struct TimerView: View {
                     Spacer()
                 }
                 .font(.custom("CursedTimerUlil", size: 100))
-                .foregroundColor(slot.option == .traning ? .accentColor : .white)
+                .foregroundColor(slot.option == .work ? .accentColor : .white)
                 .shadow(color: .accentColor, radius: 3, x: 3, y: 3)
                 .onAppear {
                     timer.secondsCount = slot.time
@@ -91,7 +91,7 @@ extension TimerView {
         switch slot {
         case .prepare:
             return Color("PrepearColor")
-        case .traning:
+        case .work:
             return Color("ActionColor")
         case .rase:
             return Color("AccentColor")
@@ -102,7 +102,7 @@ extension TimerView {
         switch slot {
         case .prepare:
             return "PREPEAR"
-        case .traning:
+        case .work:
             return ""
         case .rase:
             return "RELAX"

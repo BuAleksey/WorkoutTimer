@@ -21,6 +21,7 @@ struct MainView: View {
                 .ignoresSafeArea()
             if showFinishView {
                 FinishView(viewIsVisibly: $showFinishView)
+                    .onAppear { UIApplication.shared.isIdleTimerDisabled = false }
                     .transition(.move(edge: .bottom))
             } else if !setupWorkoutViewIsHidden {
                 SetupWorkoutView(
@@ -44,6 +45,7 @@ struct MainView: View {
                             }
                         }
                     }
+                    .onAppear { UIApplication.shared.isIdleTimerDisabled = true }
                     .onChange(of: cycleNumber) { _ in
                         withAnimation {
                             value.scrollTo(cycleNumber, anchor: .top)
@@ -56,17 +58,13 @@ struct MainView: View {
                     .ignoresSafeArea()
                     .disabled(true)
                     .onTapGesture {
+                        UIApplication.shared.isIdleTimerDisabled = false
                         withAnimation(.linear(duration: 0.5)) {
                             setupWorkoutViewIsHidden.toggle()
                         }
                     }
                 }
                 .transition(.move(edge: .bottom))
-            }
-        }
-        .onChange(of: showFinishView) { _ in
-            if !showFinishView {
-                UIApplication.shared.isIdleTimerDisabled = false
             }
         }
     }
