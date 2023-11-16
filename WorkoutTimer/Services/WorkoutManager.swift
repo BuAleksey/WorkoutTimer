@@ -12,7 +12,7 @@ final class WorkoutManager {
     
     private init() {}
     
-    func createWorkout(numberOfRounds: Int, workTimeCount: Int, raseTimeCount: Int) -> Workout? {
+    func createWorkout(numberOfRounds: Int, workTimeCount: Int, restTimeCount: Int) -> Workout? {
         var id = 1
         var slots: [Slot] = []
         guard workTimeCount != 0 else { return nil }
@@ -28,12 +28,12 @@ final class WorkoutManager {
                         option: .work
                     )
                 )
-                if raseTimeCount > 0 {
+                if restTimeCount > 0 {
                     id += 1
                     slots.append(
                         Slot(
                             id: id,
-                            time: raseTimeCount,
+                            time: restTimeCount,
                             option: .rest
                         )
                     )

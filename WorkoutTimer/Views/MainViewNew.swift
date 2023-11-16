@@ -16,6 +16,7 @@ struct MainViewNew: View {
                 SetupWorkoutView()
             }
         }
+        .ignoresSafeArea()
     }
 }
 

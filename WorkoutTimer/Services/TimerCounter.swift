@@ -12,11 +12,9 @@ final class TimerCounter: ObservableObject {
     static let shared = TimerCounter()
     
     @Published var secondsCount = 0
-    @Published var timerIsFinished = true
-    @Published var lastThreeSeconds = false
+    //@Published var timerIsFinished = true
     
     private lazy var totalSeconds: Int = { secondsCount }()
-    
     private var timer: Timer?
     
     private init() {}
@@ -39,13 +37,9 @@ final class TimerCounter: ObservableObject {
     @objc private func updateTimer() {
         if secondsCount > 0 {
             secondsCount -= 1
-            if secondsCount < 3 {
-                lastThreeSeconds.toggle()
-            }
         } else {
-            timer?.invalidate()
-            timer = nil
-            timerIsFinished.toggle()
+            cancelTimer()
+            //timerIsFinished.toggle()
         }
     }
     

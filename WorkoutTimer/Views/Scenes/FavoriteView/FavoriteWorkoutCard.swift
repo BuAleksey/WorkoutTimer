@@ -8,10 +8,18 @@
 import SwiftUI
 
 struct FavoriteWorkoutCard: View {
-    var numberOfRounds = "5"
-    var workTime = "3:00"
-    var raseTime = "0:40"
-    var action = {}
+    @State private var showAlert = false
+    
+    var workout: Workout
+    var numberOfRounds: String {
+        setWorkoutParametrs(workout).numberOfRounds
+    }
+    var workTime: String {
+        setWorkoutParametrs(workout).workTime
+    }
+    var restTime: String {
+        setWorkoutParametrs(workout).restTime
+    }
     
     var body: some View {
         ZStack {
@@ -27,11 +35,19 @@ struct FavoriteWorkoutCard: View {
                 VStack {
                     HStack {
                         Spacer()
-                        Button(action: action) {
+                        Button(action: { showAlert.toggle() }) {
                             Image(systemName: "minus.circle.fill")
                                 .foregroundColor(.red)
                                 .font(.title2)
                         }
+                        .alert(
+                            "Do you want to remove the workout?",
+                            isPresented: $showAlert) {
+                                HStack {
+                                    Button("OK", action: { removeWorkout(workout) })
+                                    Button("Cancel", action: {})
+                                }
+                            }
                     }
                     .frame(width: UIScreen.main.bounds.width / 2 - 30)
                     Spacer()
@@ -68,13 +84,13 @@ struct FavoriteWorkoutCard: View {
                         }
                         
                         VStack {
-                            Text("RASE")
+                            Text("REST")
                                 .font(.system(
                                     size: 15,
                                     weight: .regular,
                                     design: .rounded
                                 ))
-                            Text("\(raseTime)")
+                            Text("\(restTime)")
                                 .font(.system(
                                     size: 15,
                                     weight: .heavy,
@@ -91,5 +107,40 @@ struct FavoriteWorkoutCard: View {
 }
 
 #Preview {
-    FavoriteWorkoutCard()
+    FavoriteWorkoutCard(workout: .defaultWorkout)
+}
+
+// MARK: - Private metods
+extension FavoriteWorkoutCard {
+    private func setWorkoutParametrs(_ workout: Workout) -> (numberOfRounds: String, workTime: String, restTime: String) {
+        let timePresent = TimePresent.shared
+        var parametrs = (numberOfRounds: "00", workTime: "00", restTime: "00")
+        
+        guard let workSlot = workout.slots.first(
+            where: { $0.option == .work }
+        ) else { return parametrs }
+        let workMin = timePresent.getMinString(sec: workSlot.time)
+        let workSec = timePresent.getSecString(sec: workSlot.time)
+        parametrs.workTime = "\(workMin):\(workSec)"
+        
+        if let restSlot = workout.slots.first (where: { $0.option == .rest }) {
+            let restMin = timePresent.getMinString(sec: restSlot.time)
+            let restSec = timePresent.getSecString(sec: restSlot.time)
+            parametrs.restTime = "\(restMin):\(restSec)"
+        } else {
+            parametrs.restTime = "00"
+        }
+        
+        let restSlots = workout.slots.filter({ $0.option == .rest })
+        
+        parametrs.numberOfRounds = parametrs.restTime == "00"
+        ? String(workout.slots.count - 2)
+        : String(workout.slots.count - 2 - restSlots.count)
+        
+        return parametrs
+    }
+    
+    private func removeWorkout(_ workout: Workout) {
+        DataManager.shared.removeWorkoutFromFavorites(workout)
+    }
 }

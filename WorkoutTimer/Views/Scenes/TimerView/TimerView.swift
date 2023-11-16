@@ -10,6 +10,7 @@ import SwiftUI
 struct TimerView: View {
     @Binding var slot: Slot
     @Binding var cycle: Int
+    @Binding var workCycle: Int
     
     @State private var blink = false
     
@@ -27,12 +28,13 @@ struct TimerView: View {
                 .ignoresSafeArea()
             
             VStack {
-                if slot.option == .work || slot.option == .rest {
+                if slot.option == .work {
                     HStack {
                         Spacer()
-                        Text("\(cycle - 1) / \(numberOsRounds)")
-                            .foregroundColor(Color("PrepearColor"))
-                            .font(.system(size: 30, weight: .bold, design: .rounded))
+                        Text("\(workCycle)/\(numberOsRounds)")
+                            .foregroundColor(Color("AccentColor"))
+                            .font(.system(size: 16, weight: .bold, design: .rounded))
+                            .padding(.top, 40)
                     }
                 }
                 Text(setupTitel(for: slot.option))
@@ -54,10 +56,16 @@ struct TimerView: View {
                 .foregroundColor(slot.option == .work ? .accentColor : .white)
                 .shadow(color: .accentColor, radius: 3, x: 3, y: 3)
                 .onAppear {
+                    timer.cancelTimer()
                     timer.secondsCount = slot.time
                     timer.startTimer()
                     if sounIsOn, slot.option == .work {
                         sounManager.playWorkSound()
+                    }
+                }
+                .onDisappear {
+                    if slot.option == .work {
+                        workCycle += 1
                     }
                 }
                 .onChange(of: timer.secondsCount) { _ in
@@ -75,9 +83,6 @@ struct TimerView: View {
                         }
                     }
                 }
-                .onDisappear {
-                    TimerCounter.shared.cancelTimer()
-                }
                 Spacer()
             }
             .padding()
@@ -90,6 +95,7 @@ struct TimerView_Previews: PreviewProvider {
         TimerView(
             slot: .constant(.defaultSlot),
             cycle: .constant(1),
+            workCycle: .constant(1),
             sounIsOn: true,
             numberOsRounds: 5
         )

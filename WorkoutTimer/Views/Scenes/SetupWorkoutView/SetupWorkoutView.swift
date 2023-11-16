@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SetupWorkoutView: View {
     @State private var workout = Workout.defaultWorkout
-    @State private var numberOfRounds = 3
     @State private var soundIsOn = true
     
     @State private var favoritesViewIsShow = false
@@ -19,6 +18,7 @@ struct SetupWorkoutView: View {
     @State private var showAddToFavoritesBtn = false
     @State private var navigationLinkIsActive = false
     
+    @State private var numberOfRounds = 3
     @State private var workTimeMinutes = 0
     @State private var workTimeSeconds = 0
     @State private var restTimeMinutes = 0
@@ -77,6 +77,10 @@ struct SetupWorkoutView: View {
                         .font(.system(size: 20, weight: .bold, design: .rounded))
                     PickerView(choiceNumber: $numberOfRounds)
                 }
+                .onChange(of: numberOfRounds) { _ in
+                    showAddToFavoritesBtn = true
+                }
+                
                 SelectionView(
                     timeMinutes: $workTimeMinutes,
                     timeSeconds: $workTimeSeconds,
@@ -143,11 +147,11 @@ struct SetupWorkoutView: View {
         }
         .padding()
     }
+}
     
-    struct SettingsView_Previews: PreviewProvider {
-        static var previews: some View {
-            SetupWorkoutView()
-        }
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SetupWorkoutView()
     }
 }
 
@@ -157,7 +161,7 @@ extension SetupWorkoutView {
         guard let workout = WorkoutManager.shared.createWorkout(
             numberOfRounds: numberOfRounds,
             workTimeCount: workTimeCount,
-            raseTimeCount: restTimeCount
+            restTimeCount: restTimeCount
         ) else {
             withAnimation {
                 hintIsShow = true
@@ -177,7 +181,7 @@ extension SetupWorkoutView {
         guard let workout = WorkoutManager.shared.createWorkout(
             numberOfRounds: numberOfRounds,
             workTimeCount: workTimeCount,
-            raseTimeCount: restTimeCount
+            restTimeCount: restTimeCount
         ) else { return }
         DataManager.shared.addWorkoutToFavorites(workout)
         showAddToFavoritesBtn = false

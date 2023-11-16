@@ -13,6 +13,7 @@ struct TimerScrollView: View {
     @Binding var navigationLinkIsActive: Bool
     
     @State private var cycleNumber = 1
+    @State private var workCycleNumber = 1
     
     var numberOsRounds: Int
     
@@ -24,6 +25,7 @@ struct TimerScrollView: View {
                         TimerView(
                             slot: slot,
                             cycle: $cycleNumber,
+                            workCycle: $workCycleNumber,
                             sounIsOn: soundIsOn,
                             numberOsRounds: numberOsRounds
                         )
@@ -34,12 +36,13 @@ struct TimerScrollView: View {
             .navigationBarHidden(true)
             .onAppear { UIApplication.shared.isIdleTimerDisabled = true }
             .onChange(of: cycleNumber) { _ in
-                withAnimation {
-                    value.scrollTo(cycleNumber, anchor: .top)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    withAnimation {
+                        value.scrollTo(cycleNumber, anchor: .top)
+                    }
                 }
                 if workout.slots.last!.id < cycleNumber {
                     navigationLinkIsActive.toggle()
-                    TimerCounter.shared.cancelTimer()
                 }
             }
             .ignoresSafeArea()
@@ -47,7 +50,6 @@ struct TimerScrollView: View {
             .onTapGesture {
                 UIApplication.shared.isIdleTimerDisabled = false
                 navigationLinkIsActive.toggle()
-                TimerCounter.shared.cancelTimer()
             }
         }
         .transition(.move(edge: .bottom))
