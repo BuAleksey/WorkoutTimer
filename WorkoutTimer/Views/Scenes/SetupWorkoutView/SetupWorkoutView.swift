@@ -10,6 +10,7 @@ import SwiftUI
 struct SetupWorkoutView: View {
     @State private var workout = Workout.defaultWorkout
     @State private var soundIsOn = true
+    @State private var impactIsOn = true
     
     @State private var favoritesViewIsShow = false
     @State private var settingsIsShow = false
@@ -54,7 +55,8 @@ struct SetupWorkoutView: View {
                     .sheet(isPresented: $settingsIsShow) {
                         SettingsView(
                             viewIsVisible: $settingsIsShow,
-                            soundIsOn: $soundIsOn
+                            soundIsOn: $soundIsOn,
+                            impactIsOn: $impactIsOn
                         )
                     }
             }
@@ -72,7 +74,7 @@ struct SetupWorkoutView: View {
                     PickerView(choiceNumber: $numberOfRounds)
                 }
                 .onChange(of: numberOfRounds) { _ in
-                    showAddToFavoritesBtn = true
+                    checkWorkoutInFavorites()
                 }
                 
                 SelectionView(
@@ -81,7 +83,7 @@ struct SetupWorkoutView: View {
                     title: "WORK"
                 )
                 .onChange(of: workTimeCount) { _ in
-                    showAddToFavoritesBtn = true
+                    checkWorkoutInFavorites()
                 }
                 
                 SelectionView(
@@ -90,30 +92,26 @@ struct SetupWorkoutView: View {
                     title: "REST"
                 )
                 .onChange(of: restTimeCount) { _ in
-                    showAddToFavoritesBtn = true
+                    checkWorkoutInFavorites()
                 }
             }
             .foregroundColor(Color("ActionColor"))
             
-            if workTimeCount != 0 {
-                AddToFavoriteBtn(action: addToFavorites)
-                    .onAppear { showAddToFavoritesBtn = true }
-                    .frame(height: 40)
-                    .scaleEffect(showAddToFavoritesBtn ? 1 : 0)
-                    .animation(
-                        .easeInOut(duration: 0.5),
-                        value: showAddToFavoritesBtn
-                    )
-            } else {
+            ZStack {
                 VertycallyCapView(height: 40)
+                if showAddToFavoritesBtn {
+                    AddToFavoriteBtn(action: addToFavorites)
+                        .frame(height: 40)
+                }
             }
             
             Spacer()
             
-            if hintIsShow {
-                HintView()
-            } else {
+            ZStack {
                 VertycallyCapView(height: 60)
+                if hintIsShow {
+                    HintView()
+                }
             }
             
             Button(action: startWorkout) {
@@ -131,6 +129,7 @@ struct SetupWorkoutView: View {
                 TimerScrollView(
                     workout: $workout,
                     soundIsOn: $soundIsOn,
+                    impactIsOn: $impactIsOn,
                     navigationLinkIsActive: $navigationLinkIsActive,
                     numberOsRounds: numberOfRounds
                 )
@@ -149,7 +148,7 @@ struct SetupWorkoutView: View {
         .padding()
     }
 }
-    
+
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SetupWorkoutView()
@@ -176,6 +175,17 @@ extension SetupWorkoutView {
         }
         self.workout = workout
         navigationLinkIsActive.toggle()
+    }
+    
+    private func checkWorkoutInFavorites() {
+        guard let workout = WorkoutManager.shared.createWorkout(
+            numberOfRounds: numberOfRounds,
+            workTimeCount: workTimeCount,
+            restTimeCount: restTimeCount
+        ) else { return }
+        withAnimation {
+            showAddToFavoritesBtn = !DataManager.shared.isWorkoutContainedInFavorites(workout)
+        }
     }
     
     private func addToFavorites() {

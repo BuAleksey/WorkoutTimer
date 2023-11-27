@@ -12,8 +12,26 @@ final class DataManager: ObservableObject {
     
     @Published var favoriteWorkouts: [Workout] = []
     
+    lazy var isWorkoutContainedInFavorites: (Workout) -> Bool = { [unowned self] workout in
+        favoriteWorkouts.contains(workout)
+    }
+        
     private let userDefaults = UserDefaults()
     private let key = "favorite workouts"
+    
+    func addWorkoutToFavorites(_ workout: Workout) {
+        if !isWorkoutContainedInFavorites(workout) {
+            favoriteWorkouts.append(workout)
+            setFavoriteWorkoutsToUserDefaults()
+        }
+    }
+    
+    func removeWorkoutFromFavorites(_ workout: Workout) {
+        if let index = favoriteWorkouts.firstIndex(where: { $0.id == workout.id }) {
+            favoriteWorkouts.remove(at: index)
+            setFavoriteWorkoutsToUserDefaults()
+        }
+    }
     
     private init() {
         getFavoriteWorkoutsFromUserDefaults()
@@ -31,20 +49,6 @@ final class DataManager: ObservableObject {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(favoriteWorkouts) {
             userDefaults.setValue(encoded, forKey: key)
-        }
-    }
-    
-    func addWorkoutToFavorites(_ workout: Workout) {
-        if !favoriteWorkouts.contains(workout) {
-            favoriteWorkouts.append(workout)
-            setFavoriteWorkoutsToUserDefaults()
-        }
-    }
-    
-    func removeWorkoutFromFavorites(_ workout: Workout) {
-        if let index = favoriteWorkouts.firstIndex(where: { $0.id == workout.id }) {
-            favoriteWorkouts.remove(at: index)
-            setFavoriteWorkoutsToUserDefaults()
         }
     }
 }
