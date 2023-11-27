@@ -13,7 +13,7 @@
 		8720D1D22AC176D3005C8AE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8720D1D12AC176D3005C8AE2 /* LaunchScreen.storyboard */; };
 		8720D1D42AC17B63005C8AE2 /* work.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8720D1D32AC17B63005C8AE2 /* work.mp3 */; };
 		8731DBEB2B0394D300AFAA24 /* FavoriteWorkoutCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8731DBEA2B0394D300AFAA24 /* FavoriteWorkoutCard.swift */; };
-		8750C51D2B04E41800867129 /* MainViewNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8750C51C2B04E41800867129 /* MainViewNew.swift */; };
+		8750C51D2B04E41800867129 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8750C51C2B04E41800867129 /* MainView.swift */; };
 		8750C51F2B04E70F00867129 /* TimerScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8750C51E2B04E70F00867129 /* TimerScrollView.swift */; };
 		875FD5E92B03665600AD8BE2 /* VertycallyCapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875FD5E82B03665600AD8BE2 /* VertycallyCapView.swift */; };
 		876A85A62AD688BE0006B247 /* SettingsBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876A85A52AD688BE0006B247 /* SettingsBtnView.swift */; };
@@ -31,6 +31,9 @@
 		879CE43B2AAC4D7600822FEB /* WorkoutTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CE43A2AAC4D7600822FEB /* WorkoutTimerTests.swift */; };
 		879CE4452AAC4D7600822FEB /* WorkoutTimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CE4442AAC4D7600822FEB /* WorkoutTimerUITests.swift */; };
 		879CE4472AAC4D7600822FEB /* WorkoutTimerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CE4462AAC4D7600822FEB /* WorkoutTimerUITestsLaunchTests.swift */; };
+		87CA003C2B0F528700500A52 /* ImpactFeedBackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CA003B2B0F528700500A52 /* ImpactFeedBackGenerator.swift */; };
+		87CA003E2B0F584400500A52 /* rest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 87CA003D2B0F584300500A52 /* rest.mp3 */; };
+		87CA00442B146A9300500A52 /* 10sec.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 87CA00432B146A9300500A52 /* 10sec.mp3 */; };
 		87DA0BA02B02337F00407B28 /* AddToFavoriteBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DA0B9F2B02337F00407B28 /* AddToFavoriteBtn.swift */; };
 		87EB0BFB2AC193F1000E1565 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EB0BFA2AC193F1000E1565 /* SettingsView.swift */; };
 		87FAA4BC2ABAD0D40077E4AB /* TimePresent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FAA4BB2ABAD0D40077E4AB /* TimePresent.swift */; };
@@ -61,7 +64,7 @@
 		8720D1D12AC176D3005C8AE2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8720D1D32AC17B63005C8AE2 /* work.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = work.mp3; sourceTree = "<group>"; };
 		8731DBEA2B0394D300AFAA24 /* FavoriteWorkoutCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteWorkoutCard.swift; sourceTree = "<group>"; };
-		8750C51C2B04E41800867129 /* MainViewNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewNew.swift; sourceTree = "<group>"; };
+		8750C51C2B04E41800867129 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8750C51E2B04E70F00867129 /* TimerScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerScrollView.swift; sourceTree = "<group>"; };
 		875FD5E82B03665600AD8BE2 /* VertycallyCapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertycallyCapView.swift; sourceTree = "<group>"; };
 		876A85A52AD688BE0006B247 /* SettingsBtnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsBtnView.swift; sourceTree = "<group>"; };
@@ -82,6 +85,9 @@
 		879CE4402AAC4D7600822FEB /* WorkoutTimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorkoutTimerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		879CE4442AAC4D7600822FEB /* WorkoutTimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimerUITests.swift; sourceTree = "<group>"; };
 		879CE4462AAC4D7600822FEB /* WorkoutTimerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		87CA003B2B0F528700500A52 /* ImpactFeedBackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactFeedBackGenerator.swift; sourceTree = "<group>"; };
+		87CA003D2B0F584300500A52 /* rest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rest.mp3; sourceTree = "<group>"; };
+		87CA00432B146A9300500A52 /* 10sec.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 10sec.mp3; sourceTree = "<group>"; };
 		87DA0B9F2B02337F00407B28 /* AddToFavoriteBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToFavoriteBtn.swift; sourceTree = "<group>"; };
 		87EB0BFA2AC193F1000E1565 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		87FAA4BB2ABAD0D40077E4AB /* TimePresent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimePresent.swift; sourceTree = "<group>"; };
@@ -146,7 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				8750C51E2B04E70F00867129 /* TimerScrollView.swift */,
-				870DE31F2AB1A94300146F59 /* TimerView.swift */,
+				87CA003F2B0F630D00500A52 /* SubViews */,
 			);
 			path = TimerView;
 			sourceTree = "<group>";
@@ -155,7 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				876A85AA2AD68B240006B247 /* FavoritesView.swift */,
-				8731DBEA2B0394D300AFAA24 /* FavoriteWorkoutCard.swift */,
+				87CA00402B0F632200500A52 /* SubViews */,
 			);
 			path = FavoriteView;
 			sourceTree = "<group>";
@@ -163,7 +169,7 @@
 		876F6E172ABC2DBD00E00CBB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8750C51C2B04E41800867129 /* MainViewNew.swift */,
+				8750C51C2B04E41800867129 /* MainView.swift */,
 				876F6E182ABC2DEE00E00CBB /* Scenes */,
 				875FD5E72B03658700AD8BE2 /* SecondaryViews */,
 			);
@@ -201,6 +207,8 @@
 			isa = PBXGroup;
 			children = (
 				8720D1D32AC17B63005C8AE2 /* work.mp3 */,
+				87CA00432B146A9300500A52 /* 10sec.mp3 */,
+				87CA003D2B0F584300500A52 /* rest.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -212,6 +220,7 @@
 				876F6E222ABC73E100E00CBB /* SoundManager.swift */,
 				870DE31B2AAF0D4800146F59 /* TimerCounter.swift */,
 				876A85AE2AD68E130006B247 /* DataManager.swift */,
+				87CA003B2B0F528700500A52 /* ImpactFeedBackGenerator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -286,6 +295,22 @@
 				879CE4462AAC4D7600822FEB /* WorkoutTimerUITestsLaunchTests.swift */,
 			);
 			path = WorkoutTimerUITests;
+			sourceTree = "<group>";
+		};
+		87CA003F2B0F630D00500A52 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				870DE31F2AB1A94300146F59 /* TimerView.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		87CA00402B0F632200500A52 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				8731DBEA2B0394D300AFAA24 /* FavoriteWorkoutCard.swift */,
+			);
+			path = SubViews;
 			sourceTree = "<group>";
 		};
 		87FAA4BD2ABADCCA0077E4AB /* Fonts */ = {
@@ -402,6 +427,8 @@
 			files = (
 				87FAA4BF2ABADD1A0077E4AB /* CursedTimerUlil.ttf in Resources */,
 				879CE4312AAC4D7600822FEB /* Preview Assets.xcassets in Resources */,
+				87CA003E2B0F584400500A52 /* rest.mp3 in Resources */,
+				87CA00442B146A9300500A52 /* 10sec.mp3 in Resources */,
 				8720D1D22AC176D3005C8AE2 /* LaunchScreen.storyboard in Resources */,
 				879CE42E2AAC4D7600822FEB /* Assets.xcassets in Resources */,
 				8720D1D42AC17B63005C8AE2 /* work.mp3 in Resources */,
@@ -436,12 +463,13 @@
 				878BF8682ABB13C8006FD876 /* HintView.swift in Sources */,
 				876F6E1C2ABC2E5E00E00CBB /* WorkoutManager.swift in Sources */,
 				870DE3202AB1A94300146F59 /* TimerView.swift in Sources */,
+				87CA003C2B0F528700500A52 /* ImpactFeedBackGenerator.swift in Sources */,
 				879483C72AB6C962008A2925 /* SetupWorkoutView.swift in Sources */,
 				876F6E232ABC73E100E00CBB /* SoundManager.swift in Sources */,
 				876A85AF2AD68E130006B247 /* DataManager.swift in Sources */,
 				876A85AB2AD68B240006B247 /* FavoritesView.swift in Sources */,
 				879CE42A2AAC4D7400822FEB /* WorkoutTimerApp.swift in Sources */,
-				8750C51D2B04E41800867129 /* MainViewNew.swift in Sources */,
+				8750C51D2B04E41800867129 /* MainView.swift in Sources */,
 				876A85A62AD688BE0006B247 /* SettingsBtnView.swift in Sources */,
 				870DE31C2AAF0D4800146F59 /* TimerCounter.swift in Sources */,
 				870DE31E2AB19AC900146F59 /* SelectionView.swift in Sources */,
@@ -613,6 +641,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WorkoutTimer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Workout Timer";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -624,7 +654,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = AlekseyB.WorkoutTimer;
+				PRODUCT_BUNDLE_IDENTIFIER = AlekseyBuu.WorkoutTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -647,6 +677,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WorkoutTimer/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Workout Timer";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
@@ -658,7 +690,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = AlekseyB.WorkoutTimer;
+				PRODUCT_BUNDLE_IDENTIFIER = AlekseyBuu.WorkoutTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -678,13 +710,16 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7F9PNG6Y95;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AlekseyBu.WorkoutTimerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WorkoutTimer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WorkoutTimer";
 			};
 			name = Debug;
@@ -698,13 +733,16 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7F9PNG6Y95;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AlekseyBu.WorkoutTimerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WorkoutTimer.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WorkoutTimer";
 			};
 			name = Release;

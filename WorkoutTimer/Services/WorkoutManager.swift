@@ -54,7 +54,7 @@ final class WorkoutManager {
         let finishSlot = Slot(id: id, time: 3, option: .finish)
         slots.append(finishSlot)
         
-        let workout = Workout(slots: slots)
+        let workout = Workout(numberOfRounds: numberOfRounds, slots: slots)
         return workout
     }
 }

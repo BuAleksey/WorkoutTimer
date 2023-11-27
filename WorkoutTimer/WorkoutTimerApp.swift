@@ -11,7 +11,7 @@ import SwiftUI
 struct WorkoutTimerApp: App {
     var body: some Scene {
         WindowGroup {
-            MainViewNew()
+            MainView()
         }
     }
 }

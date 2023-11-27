@@ -13,14 +13,15 @@ struct TimerView: View {
     @Binding var workCycle: Int
     
     @State private var blink = false
-    
+        
     @ObservedObject private var timer = TimerCounter.shared
     
     var sounIsOn: Bool
     var numberOsRounds: Int
     
     private let timePresent = TimePresent.shared
-    private let sounManager = SoundManager()
+    private let soundManager = SoundManager.shared
+    private let impact = ImpactFeedBackGenerator.shared
     
     var body: some View {
         ZStack {
@@ -46,22 +47,25 @@ struct TimerView: View {
                     .offset(y: 130)
                 Spacer()
                 HStack(spacing: -10) {
-                    Spacer()
-                    Text(timePresent.getMinString(sec: timer.secondsCount))
-                    Text(":")
-                    Text(timePresent.getSecString(sec: timer.secondsCount))
-                    Spacer()
+                    if slot.option != .finish {
+                        Spacer()
+                        Text(timePresent.getMinString(sec: timer.secondsCount))
+                        Text(":")
+                        Text(timePresent.getSecString(sec: timer.secondsCount))
+                        Spacer()
+                    }
                 }
                 .font(.custom("CursedTimerUlil", size: 100))
                 .foregroundColor(slot.option == .work ? .accentColor : .white)
                 .shadow(color: .accentColor, radius: 3, x: 3, y: 3)
                 .onAppear {
+                    setupImpact(for: slot.option)
+                    
                     timer.cancelTimer()
                     timer.secondsCount = slot.time
                     timer.startTimer()
-                    if sounIsOn, slot.option == .work {
-                        sounManager.playWorkSound()
-                    }
+                    
+                    setupSound(for: slot.option)
                 }
                 .onDisappear {
                     if slot.option == .work {
@@ -69,6 +73,11 @@ struct TimerView: View {
                     }
                 }
                 .onChange(of: timer.secondsCount) { _ in
+                    if slot.option != .prepare {
+                        if timer.secondsCount == 10 {
+                            soundManager.play10SecSound()
+                        }
+                    }
                     if timer.secondsCount == 0 {
                         cycle += 1
                     }
@@ -123,7 +132,7 @@ extension TimerView {
         case .prepare:
             return "PREPEAR"
         case .work:
-            return ""
+            return "WORK"
         case .rest:
             return "RELAX"
         case .finish:
@@ -131,6 +140,34 @@ extension TimerView {
                    FINISH
                    IT'S AMAZING!
                    """
+        }
+    }
+    
+    private func setupImpact(for slot: Option) {
+        switch slot {
+        case .prepare:
+            impact.createImpact(lavel: .light)
+        case .work:
+            impact.createImpact(lavel: .heavy)
+        case .rest:
+            impact.createImpact(lavel: .medium)
+        case .finish:
+            impact.createImpact(lavel: .light)
+        }
+    }
+    
+    private func setupSound(for slot: Option) {
+        if sounIsOn {
+            switch slot {
+            case .prepare:
+                break
+            case .work:
+                soundManager.playWorkSound()
+            case .rest:
+                soundManager.playRestSound()
+            case .finish:
+                soundManager.playRestSound()
+            }
         }
     }
 }

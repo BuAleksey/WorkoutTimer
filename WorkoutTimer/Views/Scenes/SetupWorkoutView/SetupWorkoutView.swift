@@ -18,7 +18,9 @@ struct SetupWorkoutView: View {
     @State private var showAddToFavoritesBtn = false
     @State private var navigationLinkIsActive = false
     
-    @State private var numberOfRounds = 3
+    @State private var selectedWorkout = Workout.defaultWorkout
+    
+    @State private var numberOfRounds = 1
     @State private var workTimeMinutes = 0
     @State private var workTimeSeconds = 0
     @State private var restTimeMinutes = 0
@@ -30,39 +32,31 @@ struct SetupWorkoutView: View {
     private var restTimeCount: Int {
         restTimeMinutes * 60 + restTimeSeconds
     }
+    private let timePresent = TimePresent.shared
     
     var body: some View {
         VStack {
             HStack {
                 FavoriteBtnView()
-                    .onTapGesture {
-                        favoritesViewIsShow.toggle()
+                    .onTapGesture { favoritesViewIsShow.toggle() }
+                    .sheet( isPresented: $favoritesViewIsShow) {
+                        FavoritesView(
+                            viewIsVisible: $favoritesViewIsShow,
+                            workout: $workout,
+                            selectedWorkout: $selectedWorkout
+                        )
                     }
-                    .sheet(
-                        isPresented: $favoritesViewIsShow,
-                        content: {
-                            FavoritesView(
-                                viewIsVisible: $favoritesViewIsShow,
-                                workout: $workout
-                            )
-                        }
-                    )
                 
                 Spacer()
                 
                 SettingsBtnView()
-                    .onTapGesture {
-                        settingsIsShow.toggle()
+                    .onTapGesture { settingsIsShow.toggle() }
+                    .sheet(isPresented: $settingsIsShow) {
+                        SettingsView(
+                            viewIsVisible: $settingsIsShow,
+                            soundIsOn: $soundIsOn
+                        )
                     }
-                    .sheet(
-                        isPresented: $settingsIsShow,
-                        content: {
-                            SettingsView(
-                                viewIsVisible: $settingsIsShow,
-                                soundIsOn: $soundIsOn
-                            )
-                        }
-                    )
             }
             
             Spacer()
@@ -145,6 +139,13 @@ struct SetupWorkoutView: View {
             
             Spacer()
         }
+        .onChange(of: selectedWorkout) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                withAnimation {
+                    setWorkoutParametrs()
+                }
+            }
+        }
         .padding()
     }
 }
@@ -185,5 +186,23 @@ extension SetupWorkoutView {
         ) else { return }
         DataManager.shared.addWorkoutToFavorites(workout)
         showAddToFavoritesBtn = false
+    }
+    
+    private func setWorkoutParametrs() {
+        numberOfRounds = timePresent.setWorkoutParametrs(
+            selectedWorkout
+        ).numberOfRounds
+        workTimeMinutes = timePresent.setWorkoutParametrs(
+            selectedWorkout
+        ).workTime.min
+        workTimeSeconds = timePresent.setWorkoutParametrs(
+            selectedWorkout
+        ).workTime.sec
+        restTimeMinutes = timePresent.setWorkoutParametrs(
+            selectedWorkout
+        ).restTime.min
+        restTimeSeconds = timePresent.setWorkoutParametrs(
+            selectedWorkout
+        ).restTime.sec
     }
 }

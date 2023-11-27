@@ -10,10 +10,9 @@ import SwiftUI
 struct FavoritesView: View {
     @Binding var viewIsVisible: Bool
     @Binding var workout: Workout
+    @Binding var selectedWorkout: Workout
     
     @ObservedObject private var dataManager = DataManager.shared
-    
-    @State private var showAlert = false
     
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -36,25 +35,27 @@ struct FavoritesView: View {
                         .resizable()
                         .frame(width: 200, height: 200)
                 } else {
-                    ScrollView {
+                    ScrollView(.vertical, showsIndicators: false) {
                         LazyVGrid(
                             columns: columns,
                             content: {
                                 ForEach(dataManager.favoriteWorkouts) { workout in
-                                    FavoriteWorkoutCard(workout: workout)
-                                }
-                                .onTapGesture {
-                                    self.workout = workout
-                                    viewIsVisible.toggle()
+                                    FavoriteWorkoutCard(
+                                        selectedWorkout: $selectedWorkout,
+                                        workout: workout)
                                 }
                             }
                         )
+                    }
+                    .onChange(of: selectedWorkout) { _ in
+                        viewIsVisible.toggle()
                     }
                 }
                 Spacer()
             }
             .foregroundColor(Color("ActionColor"))
-            .padding()
+            .ignoresSafeArea()
+            .padding([.top, .leading, .trailing])
         }
     }
 }
@@ -62,6 +63,7 @@ struct FavoritesView: View {
 #Preview {
     FavoritesView(
         viewIsVisible: .constant(true),
-        workout: .constant(Workout.defaultWorkout)
+        workout: .constant(.defaultWorkout),
+        selectedWorkout: .constant(.defaultWorkout)
     )
 }

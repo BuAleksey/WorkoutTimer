@@ -1,5 +1,5 @@
 //
-//  MainViewNew.swift
+//  MainView.swift
 //  WorkoutTimer
 //
 //  Created by Buba on 15.11.2023.
@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct MainViewNew: View {
+struct MainView: View {
     var body: some View {
         NavigationView {
             ZStack {
                 Color.accentColor
-                    .ignoresSafeArea()
+                    .ignoresSafeArea(.all)
                 SetupWorkoutView()
             }
+            .navigationBarHidden(true)
         }
-        .ignoresSafeArea()
     }
 }
 
 #Preview {
-    MainViewNew()
+    MainView()
 }

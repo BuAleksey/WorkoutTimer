@@ -8,10 +8,11 @@
 import Foundation
 
 struct Workout: Identifiable, Codable {
-    var id = UUID()
+    var id = UUID().uuidString
+    let numberOfRounds: Int
     var slots: [Slot]
     
-    static let defaultWorkout = Workout(slots: [Slot.defaultSlot])
+    static let defaultWorkout = Workout(numberOfRounds: 3, slots: [Slot.defaultSlot])
 }
 
 struct Slot: Identifiable, Codable {
@@ -31,13 +32,15 @@ enum Option: Codable {
 
 extension Workout: Equatable {
     static func == (lhs: Workout, rhs: Workout) -> Bool {
-        let lhsTrainingTime = lhs.slots.first { $0.option == .work }
-        let rhsTrainingTime = rhs.slots.first { $0.option == .work }
+        let lhsWorkTime = lhs.slots.first { $0.option == .work }
+        let rhsWorkTime = rhs.slots.first { $0.option == .work }
         
         let lhsRestTime = lhs.slots.first { $0.option == .rest }
         let rhsRestTime = rhs.slots.first { $0.option == .rest }
         
-        if lhsTrainingTime?.time == rhsTrainingTime?.time && lhsRestTime?.time == rhsRestTime?.time {
+        if lhsWorkTime?.time == rhsWorkTime?.time
+            && lhsRestTime?.time == rhsRestTime?.time
+            && lhs.numberOfRounds == rhs.numberOfRounds {
             return true
         } else {
             return false

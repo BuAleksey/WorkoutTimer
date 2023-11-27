@@ -19,7 +19,7 @@ final class DataManager: ObservableObject {
         getFavoriteWorkoutsFromUserDefaults()
     }
     
-    func getFavoriteWorkoutsFromUserDefaults() {
+    private func getFavoriteWorkoutsFromUserDefaults() {
         guard let data = userDefaults.data(forKey: key) else { return }
         let decoder = JSONDecoder()
         if let decodedData = try? decoder.decode([Workout].self, from: data) {
@@ -27,7 +27,7 @@ final class DataManager: ObservableObject {
         }
     }
     
-    func setFavoriteWorkoutsToUserDefaults() {
+    private func setFavoriteWorkoutsToUserDefaults() {
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(favoriteWorkouts) {
             userDefaults.setValue(encoded, forKey: key)

@@ -12,7 +12,6 @@ final class TimerCounter: ObservableObject {
     static let shared = TimerCounter()
     
     @Published var secondsCount = 0
-    //@Published var timerIsFinished = true
     
     private lazy var totalSeconds: Int = { secondsCount }()
     private var timer: Timer?
@@ -39,11 +38,6 @@ final class TimerCounter: ObservableObject {
             secondsCount -= 1
         } else {
             cancelTimer()
-            //timerIsFinished.toggle()
         }
-    }
-    
-    deinit {
-        print("deinit")
     }
 }

@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct FavoriteWorkoutCard: View {
+    @Binding var selectedWorkout: Workout
     @State private var showAlert = false
     
     var workout: Workout
-    var numberOfRounds: String {
+    
+    private var numberOfRounds: String {
         setWorkoutParametrs(workout).numberOfRounds
     }
-    var workTime: String {
+    private var workTime: String {
         setWorkoutParametrs(workout).workTime
     }
-    var restTime: String {
+    private var restTime: String {
         setWorkoutParametrs(workout).restTime
     }
     
@@ -103,41 +105,23 @@ struct FavoriteWorkoutCard: View {
                 .foregroundStyle(Color("ActionColor"))
             }
         }
+        .onTapGesture {
+            selectedWorkout = workout
+        }
     }
 }
 
 #Preview {
-    FavoriteWorkoutCard(workout: .defaultWorkout)
+    FavoriteWorkoutCard(
+        selectedWorkout: .constant(.defaultWorkout),
+        workout: .defaultWorkout
+    )
 }
 
 // MARK: - Private metods
 extension FavoriteWorkoutCard {
     private func setWorkoutParametrs(_ workout: Workout) -> (numberOfRounds: String, workTime: String, restTime: String) {
-        let timePresent = TimePresent.shared
-        var parametrs = (numberOfRounds: "00", workTime: "00", restTime: "00")
-        
-        guard let workSlot = workout.slots.first(
-            where: { $0.option == .work }
-        ) else { return parametrs }
-        let workMin = timePresent.getMinString(sec: workSlot.time)
-        let workSec = timePresent.getSecString(sec: workSlot.time)
-        parametrs.workTime = "\(workMin):\(workSec)"
-        
-        if let restSlot = workout.slots.first (where: { $0.option == .rest }) {
-            let restMin = timePresent.getMinString(sec: restSlot.time)
-            let restSec = timePresent.getSecString(sec: restSlot.time)
-            parametrs.restTime = "\(restMin):\(restSec)"
-        } else {
-            parametrs.restTime = "00"
-        }
-        
-        let restSlots = workout.slots.filter({ $0.option == .rest })
-        
-        parametrs.numberOfRounds = parametrs.restTime == "00"
-        ? String(workout.slots.count - 2)
-        : String(workout.slots.count - 2 - restSlots.count)
-        
-        return parametrs
+        TimePresent.shared.setWorkoutParametrsForFavorites(workout)
     }
     
     private func removeWorkout(_ workout: Workout) {

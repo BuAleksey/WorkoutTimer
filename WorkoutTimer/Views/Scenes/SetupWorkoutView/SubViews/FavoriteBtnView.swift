@@ -11,7 +11,7 @@ struct FavoriteBtnView: View {
     @State private var scale: CGFloat = 1.3
     
     var body: some View {
-        Image(systemName: "heart")
+        Image(systemName: "heart.fill")
             .font(.title)
             .foregroundColor(Color("ActionColor"))
             .scaleEffect(scale)
