@@ -16,7 +16,7 @@ struct SetupWorkoutView: View {
                 if viewModel.selectedWorkoutIsEmpty {
                     HorizontalCapView(width: 30)
                 } else {
-                    SelectedWorkoutBtnView()
+                    SelectWorkoutBtnView()
                         .onTapGesture { viewModel.selectedWorkoutViewIsShow.toggle() }
                         .sheet(isPresented: $viewModel.selectedWorkoutViewIsShow) {
                             SelectedWorkoutView(
@@ -39,7 +39,7 @@ struct SetupWorkoutView: View {
             Spacer()
             
             Text("LET'S START WORKOUT")
-                .foregroundColor(Color("ActionColor"))
+                .foregroundColor(.action)
                 .font(.system(size: 30, weight: .bold, design: .rounded))
             Spacer()
             HStack(spacing: -3) {
@@ -76,7 +76,7 @@ struct SetupWorkoutView: View {
                     viewModel.checkWorkoutInSelected()
                 }
             }
-            .foregroundColor(Color("ActionColor"))
+            .foregroundColor(.action)
             
             ZStack {
                 VertycalCapView(height: 40)
@@ -92,6 +92,7 @@ struct SetupWorkoutView: View {
                 VertycalCapView(height: 60)
                 if viewModel.hintIsShow {
                     HintView()
+                        .offset(x: -10)
                 }
             }
             
@@ -99,7 +100,7 @@ struct SetupWorkoutView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width: 100, height: 50)
-                        .foregroundColor(Color("ActionColor"))
+                        .foregroundColor(.action)
                     Text("GO")
                         .foregroundColor(.accentColor)
                         .font(.system(size: 25, weight: .bold, design: .rounded))

@@ -12,11 +12,20 @@ final class TimerCounter: ObservableObject {
     static let shared = TimerCounter()
     
     @Published var secondsCount = 0
+    @Published var lastTenSeconds = false
     
     private lazy var totalSeconds: Int = { secondsCount }()
     private var timer: Timer?
+    private var cancellabels: [AnyCancellable] = []
     
-    private init() {}
+    private init() {
+        $secondsCount
+            .map { numberOfSeconds in
+                numberOfSeconds <= 10
+            }
+            .assign(to: \.lastTenSeconds, on: self)
+            .store(in: &cancellabels)
+    }
     
     func startTimer() {
         timer = Timer.scheduledTimer(

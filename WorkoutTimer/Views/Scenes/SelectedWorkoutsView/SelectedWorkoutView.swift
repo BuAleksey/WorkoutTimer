@@ -36,7 +36,7 @@ struct SelectedWorkoutView: View {
                     Spacer()
                     Image("clear")
                         .resizable()
-                        .frame(width: 250, height: 250)
+                        .frame(width: 200, height: 200)
                     Spacer()
                 } else {
                     ScrollView(.vertical, showsIndicators: false) {
@@ -55,12 +55,12 @@ struct SelectedWorkoutView: View {
                 }
                 Spacer()
             }
-            .onChange(of: dataManager.selectedWorkouts.isEmpty, perform: { _ in
+            .onChange(of: dataManager.selectedWorkouts.isEmpty) { _ in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     viewIsVisible = false
                 }
-            })
-            .foregroundColor(Color("ActionColor"))
+            }
+            .foregroundColor(.action)
             .ignoresSafeArea()
             .padding([.top, .leading, .trailing])
         }

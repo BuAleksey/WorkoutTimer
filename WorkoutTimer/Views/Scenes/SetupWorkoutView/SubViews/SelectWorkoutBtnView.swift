@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct SelectedWorkoutBtnView: View {
+struct SelectWorkoutBtnView: View {
     @State private var scale: CGFloat = 1.3
+    @State private var color = Color(.gold)
     
     var body: some View {
         Image(systemName: "star.fill")
             .font(.title)
-            .foregroundColor(Color("ActionColor"))
+            .foregroundColor(color)
             .scaleEffect(scale)
             .animation(
                 .linear(duration: 1).repeatCount(3),
@@ -23,10 +24,13 @@ struct SelectedWorkoutBtnView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     scale = 1
                 }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                    color = .action
+                }
             }
     }
 }
 
 #Preview {
-    SelectedWorkoutBtnView()
+    SelectWorkoutBtnView()
 }

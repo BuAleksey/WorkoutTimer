@@ -46,7 +46,7 @@ struct PickerView: View {
         Picker("", selection: $choiceNumber) {
             ForEach(range, id: \.self) { number in
                 Text(number.formatted())
-                    .foregroundColor(Color("ActionColor"))
+                    .foregroundColor(.action)
                     .font(.system(size: 15, weight: .bold, design: .rounded))
             }
         }

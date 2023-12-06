@@ -15,7 +15,7 @@ struct ClearBntView: View {
         Button(action: action) {
             Image(systemName: "trash.fill")
                 .font(.title3)
-                .foregroundColor(Color("AttentionColor"))
+                .foregroundColor(.attention)
                 .rotationEffect(Angle(degrees: shouldShake ? 7 : 0))
                 .animation(Animation.default.speed(1).repeatCount(3), value: shouldShake)
                 .onAppear {

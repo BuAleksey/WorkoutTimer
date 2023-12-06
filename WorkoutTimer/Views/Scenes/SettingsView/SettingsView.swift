@@ -24,14 +24,14 @@ struct SettingsView: View {
                         .frame(height: 50)
                     HStack {
                         Toggle("Sound", isOn: $mainSettings.soundIsOn)
-                            .tint(Color("ActionColor"))
+                            .tint(.action)
                     }
                     HStack {
                         Toggle("Vibrate", isOn: $mainSettings.vibrateIsOn)
-                            .tint(Color("ActionColor"))
+                            .tint(.action)
                     }
                 }
-                .foregroundColor(Color("ActionColor"))
+                .foregroundColor(.action)
                 .font(.system(size: 15, weight: .bold, design: .rounded))
                 
                 Spacer()

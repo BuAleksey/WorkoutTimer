@@ -13,7 +13,7 @@ struct SettingsBtnView: View {
     var body: some View {
         Image(systemName: "gear")
             .font(.title)
-            .foregroundColor(Color("ActionColor"))
+            .foregroundColor(.action)
             .rotationEffect(Angle(degrees: rotation))
             .animation(
                 .linear(duration: 2),

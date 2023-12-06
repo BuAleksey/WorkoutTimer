@@ -41,11 +41,8 @@ struct SelectedWorkoutCard: View {
                         Spacer()
                         Button(action: { showAlert.toggle() }) {
                             ZStack {
-//                                Circle()
-//                                    .frame(width: 20)
-//                                    .foregroundStyle(Color.accentColor)
                                 Image(systemName: "minus.circle.fill")
-                                    .foregroundColor(Color("AttentionColor"))
+                                    .foregroundColor(.attention)
                                     .font(.title2)
                             }
                         }
@@ -109,7 +106,7 @@ struct SelectedWorkoutCard: View {
                         }
                     }
                 }
-                .foregroundStyle(Color("ActionColor"))
+                .foregroundStyle(Color.action)
             }
         }
         .onTapGesture {

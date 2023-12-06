@@ -13,6 +13,7 @@ struct TimerView: View {
     @Binding var workCycle: Int
     
     @State private var blink = false
+    @State private var blinkShadow = false
         
     @ObservedObject private var timer = TimerCounter.shared
     @EnvironmentObject var mainSettings: MainSettings
@@ -25,7 +26,7 @@ struct TimerView: View {
     
     var body: some View {
         ZStack {
-            setupBackgroundColor(for: slot.option)
+            setupBackgroundColor(for: slot)
                 .ignoresSafeArea()
             
             VStack {
@@ -33,12 +34,13 @@ struct TimerView: View {
                     HStack {
                         Spacer()
                         Text("\(workCycle)/\(numberOsRounds)")
-                            .foregroundColor(Color("AccentColor"))
+                            .foregroundColor(.accentColor)
                             .font(.system(size: 16, weight: .bold, design: .rounded))
-                            .padding(.top, 40)
+                            .shadow(color: .accentColor, radius: 3, x: 3, y: 3)
+                            .padding(.top, 30)
                     }
                 }
-                Text(setupTitel(for: slot.option))
+                Text(setupTitel(for: slot))
                     .foregroundColor(slot.option == .work ? .accentColor : .white)
                     .font(.system(size: 50, weight: .bold, design: .rounded))
                     .multilineTextAlignment(.center)
@@ -56,16 +58,19 @@ struct TimerView: View {
                     }
                 }
                 .font(.custom("CursedTimerUlil", size: 100))
-                .foregroundColor(slot.option == .work ? .accentColor : .white)
-                .shadow(color: .accentColor, radius: 3, x: 3, y: 3)
+                .foregroundColor(setupTimerColorForLastTenSeconds(for: slot))
+                .shadow(
+                    color: setupShadowColorForLastTenSeconds(for: slot),
+                    radius: blinkShadow ? 7 : 3, x: 3, y: 3
+                )
                 .onAppear {
-                    setupImpact(for: slot.option)
+                    setupImpact(for: slot)
                     
                     timer.cancelTimer()
                     timer.secondsCount = slot.time
                     timer.startTimer()
                     
-                    setupSound(for: slot.option)
+                    setupSound(for: slot)
                 }
                 .onDisappear {
                     if slot.option == .work {
@@ -76,6 +81,9 @@ struct TimerView: View {
                     if slot.option != .prepare {
                         if timer.secondsCount == 10 {
                             soundManager.play10SecSound()
+                            withAnimation(.easeIn(duration: 0.3)) {
+                                blinkShadow.toggle()
+                            }
                         }
                     }
                     if timer.secondsCount == 0 {
@@ -112,22 +120,61 @@ struct TimerView_Previews: PreviewProvider {
 
 // MARK: - Private metods
 extension TimerView {
-    private func setupBackgroundColor(for slot: Option) -> Color {
-        switch slot {
+    private func setupBackgroundColor(for slot: Slot) -> Color {
+        switch slot.option {
         case .prepare:
-            return Color("PrepearColor")
+            return .prepear
         case .work:
-            return Color("ActionColor")
+            return .action
         case .rest:
-            return Color("AccentColor")
+            return .accentColor
         case .finish:
-            return Color("FinishColor")
-            
+            return .finish
         }
     }
     
-    private func setupTitel(for slot: Option) -> String {
-        switch slot {
+    private func setupTimerColorForLastTenSeconds(for slot: Slot) -> Color {
+        switch slot.option {
+        case .work:
+            if timer.lastTenSeconds {
+                return .attention
+            } else {
+                return .accentColor
+            }
+        case .rest:
+            if timer.lastTenSeconds {
+                return .attention
+            } else {
+                return .white
+            }
+        case .prepare, .finish:
+            return .white
+        }
+    }
+    
+    private func setupShadowColorForLastTenSeconds(for slot: Slot) -> Color {
+        switch slot.option {
+        case .work:
+            if timer.lastTenSeconds {
+                return .attention
+                    .opacity(0.5)
+            } else {
+                return .accentColor
+            }
+        case .rest:
+            if timer.lastTenSeconds {
+                return .attention
+                    .opacity(0.5)
+            } else {
+                return .accentColor
+            }
+        case .prepare, .finish:
+            return .accentColor
+        }
+    }
+    
+    private func setupTitel(for slot: Slot) -> String {
+        switch slot.option {
         case .prepare:
             return "PREPEAR"
         case .work:
@@ -142,9 +189,9 @@ extension TimerView {
         }
     }
     
-    private func setupImpact(for slot: Option) {
+    private func setupImpact(for slot: Slot) {
         if mainSettings.vibrateIsOn {
-            switch slot {
+            switch slot.option {
             case .prepare:
                 impact.createImpact(lavel: .light)
             case .work:
@@ -157,9 +204,9 @@ extension TimerView {
         }
     }
     
-    private func setupSound(for slot: Option) {
+    private func setupSound(for slot: Slot) {
         if mainSettings.soundIsOn {
-            switch slot {
+            switch slot.option {
             case .prepare:
                 break
             case .work:

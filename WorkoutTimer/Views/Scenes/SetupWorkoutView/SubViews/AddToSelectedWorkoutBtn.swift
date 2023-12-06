@@ -16,7 +16,7 @@ struct AddToSelectedWorkoutBtn: View {
                 Text("Save workout")
                     .foregroundStyle(Color.white)
                 Image(systemName: "star.leadinghalf.filled")
-                    .foregroundStyle(Color("ActionColor"))
+                    .foregroundStyle(Color.action)
             }
         }
     }
