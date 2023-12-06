@@ -1,5 +1,5 @@
 //
-//  FavoriteWorkoutCard.swift
+//  SelectedWorkoutCard.swift
 //  WorkoutTimer
 //
 //  Created by Buba on 14.11.2023.
@@ -7,8 +7,10 @@
 
 import SwiftUI
 
-struct FavoriteWorkoutCard: View {
+struct SelectedWorkoutCard: View {
     @Binding var selectedWorkout: Workout
+    @Binding var viewIsVisible: Bool
+    
     @State private var showAlert = false
     
     var workout: Workout
@@ -38,10 +40,16 @@ struct FavoriteWorkoutCard: View {
                     HStack {
                         Spacer()
                         Button(action: { showAlert.toggle() }) {
-                            Image(systemName: "minus.circle.fill")
-                                .foregroundColor(.red)
-                                .font(.title2)
+                            ZStack {
+//                                Circle()
+//                                    .frame(width: 20)
+//                                    .foregroundStyle(Color.accentColor)
+                                Image(systemName: "minus.circle.fill")
+                                    .foregroundColor(Color("AttentionColor"))
+                                    .font(.title2)
+                            }
                         }
+                        .offset(x: -7)
                         .alert(
                             "Do you want to remove the workout?",
                             isPresented: $showAlert) {
@@ -51,7 +59,6 @@ struct FavoriteWorkoutCard: View {
                                 }
                             }
                     }
-                    .frame(width: UIScreen.main.bounds.width / 2 - 30)
                     Spacer()
                 }
                 .frame(height: 190)
@@ -107,24 +114,26 @@ struct FavoriteWorkoutCard: View {
         }
         .onTapGesture {
             selectedWorkout = workout
+            viewIsVisible.toggle()
         }
     }
 }
 
 #Preview {
-    FavoriteWorkoutCard(
+    SelectedWorkoutCard(
         selectedWorkout: .constant(.defaultWorkout),
+        viewIsVisible: .constant(true),
         workout: .defaultWorkout
     )
 }
 
 // MARK: - Private metods
-extension FavoriteWorkoutCard {
+extension SelectedWorkoutCard {
     private func setWorkoutParametrs(_ workout: Workout) -> (numberOfRounds: String, workTime: String, restTime: String) {
-        TimePresent.shared.setWorkoutParametrsForFavorites(workout)
+        TimePresent.shared.setWorkoutParametrsForSelectedWorkouts(workout)
     }
     
     private func removeWorkout(_ workout: Workout) {
-        DataManager.shared.removeWorkoutFromFavorites(workout)
+        DataManager.shared.removeWorkoutFromSelectedWorkouts(workout)
     }
 }

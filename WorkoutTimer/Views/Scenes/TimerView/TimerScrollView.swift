@@ -9,8 +9,6 @@ import SwiftUI
 
 struct TimerScrollView: View {
     @Binding var workout: Workout
-    @Binding var soundIsOn: Bool
-    @Binding var impactIsOn: Bool
     @Binding var navigationLinkIsActive: Bool
     
     @State private var cycleNumber = 1
@@ -27,8 +25,6 @@ struct TimerScrollView: View {
                             slot: slot,
                             cycle: $cycleNumber,
                             workCycle: $workCycleNumber,
-                            sounIsOn: soundIsOn,
-                            impactIsOn: impactIsOn,
                             numberOsRounds: numberOsRounds
                         )
                         .frame(height: UIScreen.main.bounds.height)
@@ -61,8 +57,6 @@ struct TimerScrollView: View {
 #Preview {
     TimerScrollView(
         workout: .constant(Workout.defaultWorkout),
-        soundIsOn: .constant(true),
-        impactIsOn: .constant(true),
         navigationLinkIsActive: .constant(true),
         numberOsRounds: 5
     )

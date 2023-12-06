@@ -15,9 +15,8 @@ struct TimerView: View {
     @State private var blink = false
         
     @ObservedObject private var timer = TimerCounter.shared
-    
-    var sounIsOn: Bool
-    var impactIsOn: Bool
+    @EnvironmentObject var mainSettings: MainSettings
+
     var numberOsRounds: Int
     
     private let timePresent = TimePresent.shared
@@ -106,8 +105,6 @@ struct TimerView_Previews: PreviewProvider {
             slot: .constant(.defaultSlot),
             cycle: .constant(1),
             workCycle: .constant(1),
-            sounIsOn: true,
-            impactIsOn: true,
             numberOsRounds: 5
         )
     }
@@ -146,7 +143,7 @@ extension TimerView {
     }
     
     private func setupImpact(for slot: Option) {
-        if impactIsOn {
+        if mainSettings.vibrateIsOn {
             switch slot {
             case .prepare:
                 impact.createImpact(lavel: .light)
@@ -161,7 +158,7 @@ extension TimerView {
     }
     
     private func setupSound(for slot: Option) {
-        if sounIsOn {
+        if mainSettings.soundIsOn {
             switch slot {
             case .prepare:
                 break

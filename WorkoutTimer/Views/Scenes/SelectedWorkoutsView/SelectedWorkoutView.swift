@@ -1,5 +1,5 @@
 //
-//  FavoritesView.swift
+//  SelectedWorkoutView.swift
 //  WorkoutTimer
 //
 //  Created by Buba on 11.10.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FavoritesView: View {
+struct SelectedWorkoutView: View {
     @Binding var viewIsVisible: Bool
     @Binding var workout: Workout
     @Binding var selectedWorkout: Workout
@@ -21,38 +21,45 @@ struct FavoritesView: View {
             Color.accentColor
                 .ignoresSafeArea()
             VStack {
-                Text(
-                    dataManager.favoriteWorkouts.isEmpty
-                    ? "There are no favorites workouts"
-                    : "FAVORITE WORKOUTS"
-                )
-                    .font(.system(size: 20, weight: .bold, design: .rounded))
-                    .padding(.bottom, 20)
-                
-                if dataManager.favoriteWorkouts.isEmpty {
+                HStack {
+                    HorizontalCapView(width: 30)
                     Spacer()
-                    Image("noFavorites")
+                    Text("SELECTED WORKOUTS")
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                    Spacer()
+                    ClearBntView(action: { dataManager.clearSelectedWorkouts() })
+                        .frame(width: 30)
+                }
+                .padding(.bottom, 20)
+                
+                if dataManager.selectedWorkouts.isEmpty {
+                    Spacer()
+                    Image("clear")
                         .resizable()
-                        .frame(width: 200, height: 200)
+                        .frame(width: 250, height: 250)
+                    Spacer()
                 } else {
                     ScrollView(.vertical, showsIndicators: false) {
                         LazyVGrid(
                             columns: columns,
                             content: {
-                                ForEach(dataManager.favoriteWorkouts) { workout in
-                                    FavoriteWorkoutCard(
+                                ForEach(dataManager.selectedWorkouts) { workout in
+                                    SelectedWorkoutCard(
                                         selectedWorkout: $selectedWorkout,
+                                        viewIsVisible: $viewIsVisible,
                                         workout: workout)
                                 }
                             }
                         )
                     }
-                    .onChange(of: selectedWorkout) { _ in
-                        viewIsVisible.toggle()
-                    }
                 }
                 Spacer()
             }
+            .onChange(of: dataManager.selectedWorkouts.isEmpty, perform: { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    viewIsVisible = false
+                }
+            })
             .foregroundColor(Color("ActionColor"))
             .ignoresSafeArea()
             .padding([.top, .leading, .trailing])
@@ -61,7 +68,7 @@ struct FavoritesView: View {
 }
 
 #Preview {
-    FavoritesView(
+    SelectedWorkoutView(
         viewIsVisible: .constant(true),
         workout: .constant(.defaultWorkout),
         selectedWorkout: .constant(.defaultWorkout)

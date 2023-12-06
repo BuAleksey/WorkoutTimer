@@ -8,10 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @Binding var viewIsVisible: Bool
-    
-    @Binding var soundIsOn: Bool
-    @Binding var impactIsOn: Bool
+    @EnvironmentObject var mainSettings: MainSettings
     
     var body: some View {
         ZStack {
@@ -19,16 +16,18 @@ struct SettingsView: View {
                 .ignoresSafeArea()
             VStack {
                 VStack {
-                    Text("SETTINGS")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                    HStack {
+                        Text("SETTINGS")
+                            .font(.system(size: 20, weight: .bold, design: .rounded))
+                    }
                     Spacer()
                         .frame(height: 50)
                     HStack {
-                        Toggle("Sound", isOn: $soundIsOn)
+                        Toggle("Sound", isOn: $mainSettings.soundIsOn)
                             .tint(Color("ActionColor"))
                     }
                     HStack {
-                        Toggle("Vibrate", isOn: $impactIsOn)
+                        Toggle("Vibrate", isOn: $mainSettings.vibrateIsOn)
                             .tint(Color("ActionColor"))
                     }
                 }
@@ -37,7 +36,7 @@ struct SettingsView: View {
                 
                 Spacer()
                 
-                    Text("""
+                Text("""
                          Contact information:
                          oldf03@gmail . com
                          """)
@@ -50,12 +49,4 @@ struct SettingsView: View {
             .padding()
         }
     }
-}
-
-#Preview {
-    SettingsView(
-        viewIsVisible: .constant(true),
-        soundIsOn: .constant(true),
-        impactIsOn: .constant(true)
-    )
 }

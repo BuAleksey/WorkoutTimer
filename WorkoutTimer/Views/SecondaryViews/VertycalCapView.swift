@@ -1,5 +1,5 @@
 //
-//  VertycallyCapView.swift
+//  VertycalCapView.swift
 //  WorkoutTimer
 //
 //  Created by Buba on 14.11.2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct VertycallyCapView: View {
+struct VertycalCapView: View {
     var height: CGFloat
     
     var body: some View {
@@ -18,5 +18,5 @@ struct VertycallyCapView: View {
 }
 
 #Preview {
-    VertycallyCapView(height: 50)
+    VertycalCapView(height: 50)
 }

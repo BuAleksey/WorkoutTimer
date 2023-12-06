@@ -30,7 +30,7 @@ final class TimePresent {
         }
     }
     
-    func setWorkoutParametrsForFavorites(_ workout: Workout) -> (numberOfRounds: String, workTime: String, restTime: String) {
+    func setWorkoutParametrsForSelectedWorkouts(_ workout: Workout) -> (numberOfRounds: String, workTime: String, restTime: String) {
         var parametrs = (numberOfRounds: "-", workTime: "-", restTime: "-")
         
         guard let workSlot = workout.slots.first(

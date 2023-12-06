@@ -1,5 +1,5 @@
 //
-//  FavoriteBtnView.swift
+//  SelectedWorkoutBtnView.swift
 //  WorkoutTimer
 //
 //  Created by Buba on 11.10.2023.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct FavoriteBtnView: View {
+struct SelectedWorkoutBtnView: View {
     @State private var scale: CGFloat = 1.3
     
     var body: some View {
-        Image(systemName: "heart.fill")
+        Image(systemName: "star.fill")
             .font(.title)
             .foregroundColor(Color("ActionColor"))
             .scaleEffect(scale)
@@ -28,5 +28,5 @@ struct FavoriteBtnView: View {
 }
 
 #Preview {
-    FavoriteBtnView()
+    SelectedWorkoutBtnView()
 }

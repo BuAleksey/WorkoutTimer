@@ -1,5 +1,5 @@
 //
-//  AddToFavoriteBtn.swift
+//  AddToSelectedWorkoutBtn.swift
 //  WorkoutTimer
 //
 //  Created by Buba on 13.11.2023.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-struct AddToFavoriteBtn: View {
+struct AddToSelectedWorkoutBtn: View {
     var action = {}
     
     var body: some View {
         Button(action: action) {
             HStack {
-                Text("Add workout to favorites")
+                Text("Save workout")
                     .foregroundStyle(Color.white)
-                Image(systemName: "checkmark.circle")
+                Image(systemName: "star.leadinghalf.filled")
                     .foregroundStyle(Color("ActionColor"))
             }
         }
@@ -23,5 +23,5 @@ struct AddToFavoriteBtn: View {
 }
 
 #Preview {
-    AddToFavoriteBtn()
+    AddToSelectedWorkoutBtn()
 }

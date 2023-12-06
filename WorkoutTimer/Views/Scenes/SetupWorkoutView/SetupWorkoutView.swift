@@ -8,56 +8,31 @@
 import SwiftUI
 
 struct SetupWorkoutView: View {
-    @State private var workout = Workout.defaultWorkout
-    @State private var soundIsOn = true
-    @State private var impactIsOn = true
-    
-    @State private var favoritesViewIsShow = false
-    @State private var settingsIsShow = false
-    
-    @State private var hintIsShow = false
-    @State private var showAddToFavoritesBtn = false
-    @State private var navigationLinkIsActive = false
-    
-    @State private var selectedWorkout = Workout.defaultWorkout
-    
-    @State private var numberOfRounds = 1
-    @State private var workTimeMinutes = 0
-    @State private var workTimeSeconds = 0
-    @State private var restTimeMinutes = 0
-    @State private var restTimeSeconds = 0
-    
-    private var workTimeCount: Int {
-        workTimeMinutes * 60 + workTimeSeconds
-    }
-    private var restTimeCount: Int {
-        restTimeMinutes * 60 + restTimeSeconds
-    }
-    private let timePresent = TimePresent.shared
-    
+    @ObservedObject private var viewModel = SetupWorkoutViewModel()
+            
     var body: some View {
         VStack {
             HStack {
-                FavoriteBtnView()
-                    .onTapGesture { favoritesViewIsShow.toggle() }
-                    .sheet( isPresented: $favoritesViewIsShow) {
-                        FavoritesView(
-                            viewIsVisible: $favoritesViewIsShow,
-                            workout: $workout,
-                            selectedWorkout: $selectedWorkout
-                        )
-                    }
+                if viewModel.selectedWorkoutIsEmpty {
+                    HorizontalCapView(width: 30)
+                } else {
+                    SelectedWorkoutBtnView()
+                        .onTapGesture { viewModel.selectedWorkoutViewIsShow.toggle() }
+                        .sheet(isPresented: $viewModel.selectedWorkoutViewIsShow) {
+                            SelectedWorkoutView(
+                                viewIsVisible: $viewModel.selectedWorkoutViewIsShow,
+                                workout: $viewModel.workout,
+                                selectedWorkout: $viewModel.selectedWorkout
+                            )
+                        }
+                }
                 
                 Spacer()
                 
                 SettingsBtnView()
-                    .onTapGesture { settingsIsShow.toggle() }
-                    .sheet(isPresented: $settingsIsShow) {
-                        SettingsView(
-                            viewIsVisible: $settingsIsShow,
-                            soundIsOn: $soundIsOn,
-                            impactIsOn: $impactIsOn
-                        )
+                    .onTapGesture { viewModel.settingsIsShow.toggle() }
+                    .sheet(isPresented: $viewModel.settingsIsShow) {
+                        SettingsView()
                     }
             }
             
@@ -71,36 +46,42 @@ struct SetupWorkoutView: View {
                 VStack(spacing: 8) {
                     Text("ROUNDS")
                         .font(.system(size: 20, weight: .bold, design: .rounded))
-                    PickerView(choiceNumber: $numberOfRounds)
+                    PickerView(choiceNumber: $viewModel.numberOfRounds)
                 }
-                .onChange(of: numberOfRounds) { _ in
-                    checkWorkoutInFavorites()
+                .onChange(of: viewModel.numberOfRounds) { _ in
+                    viewModel.checkWorkoutInSelected()
                 }
                 
                 SelectionView(
-                    timeMinutes: $workTimeMinutes,
-                    timeSeconds: $workTimeSeconds,
+                    timeMinutes: $viewModel.workTimeMinutes,
+                    timeSeconds: $viewModel.workTimeSeconds,
                     title: "WORK"
                 )
-                .onChange(of: workTimeCount) { _ in
-                    checkWorkoutInFavorites()
+                .onChange(of: viewModel.workTimeMinutes) { _ in
+                    viewModel.checkWorkoutInSelected()
+                }
+                .onChange(of: viewModel.workTimeSeconds) { _ in
+                    viewModel.checkWorkoutInSelected()
                 }
                 
                 SelectionView(
-                    timeMinutes: $restTimeMinutes,
-                    timeSeconds: $restTimeSeconds,
+                    timeMinutes: $viewModel.restTimeMinutes,
+                    timeSeconds: $viewModel.restTimeSeconds,
                     title: "REST"
                 )
-                .onChange(of: restTimeCount) { _ in
-                    checkWorkoutInFavorites()
+                .onChange(of: viewModel.restTimeMinutes) { _ in
+                    viewModel.checkWorkoutInSelected()
+                }
+                .onChange(of: viewModel.restTimeSeconds) { _ in
+                    viewModel.checkWorkoutInSelected()
                 }
             }
             .foregroundColor(Color("ActionColor"))
             
             ZStack {
-                VertycallyCapView(height: 40)
-                if showAddToFavoritesBtn {
-                    AddToFavoriteBtn(action: addToFavorites)
+                VertycalCapView(height: 40)
+                if viewModel.showAddToSelectedWorkoutBtn {
+                    AddToSelectedWorkoutBtn(action: viewModel.addToSelectedWorkout)
                         .frame(height: 40)
                 }
             }
@@ -108,13 +89,13 @@ struct SetupWorkoutView: View {
             Spacer()
             
             ZStack {
-                VertycallyCapView(height: 60)
-                if hintIsShow {
+                VertycalCapView(height: 60)
+                if viewModel.hintIsShow {
                     HintView()
                 }
             }
             
-            Button(action: startWorkout) {
+            Button(action: viewModel.startWorkout) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .frame(width: 100, height: 50)
@@ -125,23 +106,22 @@ struct SetupWorkoutView: View {
                 }
             }
             
-            NavigationLink("", isActive: $navigationLinkIsActive) {
+            NavigationLink("", isActive: $viewModel.navigationLinkIsActive) {
                 TimerScrollView(
-                    workout: $workout,
-                    soundIsOn: $soundIsOn,
-                    impactIsOn: $impactIsOn,
-                    navigationLinkIsActive: $navigationLinkIsActive,
-                    numberOsRounds: numberOfRounds
+                    workout: $viewModel.workout,
+                    navigationLinkIsActive: $viewModel.navigationLinkIsActive,
+                    numberOsRounds: viewModel.numberOfRounds
                 )
             }
             .hidden()
             
             Spacer()
         }
-        .onChange(of: selectedWorkout) { _ in
+        .onAppear { viewModel.checkWorkoutInSelected() }
+        .onChange(of: viewModel.selectedWorkout) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 withAnimation {
-                    setWorkoutParametrs()
+                    viewModel.setWorkoutParametrs()
                 }
             }
         }
@@ -151,68 +131,6 @@ struct SetupWorkoutView: View {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SetupWorkoutView()
-    }
-}
-
-//MARK: - Private metods
-extension SetupWorkoutView {
-    private func startWorkout() {
-        guard let workout = WorkoutManager.shared.createWorkout(
-            numberOfRounds: numberOfRounds,
-            workTimeCount: workTimeCount,
-            restTimeCount: restTimeCount
-        ) else {
-            withAnimation {
-                hintIsShow = true
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                withAnimation {
-                    hintIsShow = false
-                }
-            }
-            return
-        }
-        self.workout = workout
-        navigationLinkIsActive.toggle()
-    }
-    
-    private func checkWorkoutInFavorites() {
-        guard let workout = WorkoutManager.shared.createWorkout(
-            numberOfRounds: numberOfRounds,
-            workTimeCount: workTimeCount,
-            restTimeCount: restTimeCount
-        ) else { return }
-        withAnimation {
-            showAddToFavoritesBtn = !DataManager.shared.isWorkoutContainedInFavorites(workout)
-        }
-    }
-    
-    private func addToFavorites() {
-        guard let workout = WorkoutManager.shared.createWorkout(
-            numberOfRounds: numberOfRounds,
-            workTimeCount: workTimeCount,
-            restTimeCount: restTimeCount
-        ) else { return }
-        DataManager.shared.addWorkoutToFavorites(workout)
-        showAddToFavoritesBtn = false
-    }
-    
-    private func setWorkoutParametrs() {
-        numberOfRounds = timePresent.setWorkoutParametrs(
-            selectedWorkout
-        ).numberOfRounds
-        workTimeMinutes = timePresent.setWorkoutParametrs(
-            selectedWorkout
-        ).workTime.min
-        workTimeSeconds = timePresent.setWorkoutParametrs(
-            selectedWorkout
-        ).workTime.sec
-        restTimeMinutes = timePresent.setWorkoutParametrs(
-            selectedWorkout
-        ).restTime.min
-        restTimeSeconds = timePresent.setWorkoutParametrs(
-            selectedWorkout
-        ).restTime.sec
+        SetupWorkoutView().preferredColorScheme(.dark)
     }
 }
