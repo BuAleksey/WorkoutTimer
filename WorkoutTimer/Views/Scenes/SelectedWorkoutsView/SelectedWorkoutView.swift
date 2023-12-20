@@ -9,11 +9,10 @@ import SwiftUI
 
 struct SelectedWorkoutView: View {
     @Binding var viewIsVisible: Bool
-    @Binding var workout: Workout
-    @Binding var selectedWorkout: Workout
     
-    @ObservedObject private var dataManager = DataManager.shared
+    @StateObject private var dataManager = DataManager.shared
     
+    var workoutManager = WorkoutManager.shared
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -45,7 +44,6 @@ struct SelectedWorkoutView: View {
                             content: {
                                 ForEach(dataManager.selectedWorkouts) { workout in
                                     SelectedWorkoutCard(
-                                        selectedWorkout: $selectedWorkout,
                                         viewIsVisible: $viewIsVisible,
                                         workout: workout)
                                 }
@@ -65,12 +63,4 @@ struct SelectedWorkoutView: View {
             .padding([.top, .leading, .trailing])
         }
     }
-}
-
-#Preview {
-    SelectedWorkoutView(
-        viewIsVisible: .constant(true),
-        workout: .constant(.defaultWorkout),
-        selectedWorkout: .constant(.defaultWorkout)
-    )
 }

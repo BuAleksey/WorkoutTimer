@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var mainSettings: MainSettings
+    @StateObject private var mainSettings = MainSettings.shared
     
     var body: some View {
         ZStack {

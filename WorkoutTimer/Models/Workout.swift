@@ -7,11 +7,20 @@
 
 import Foundation
 
+enum Option: Codable {
+    case prepare
+    case work
+    case rest
+    case finish
+} 
+
 struct Workout: Identifiable, Codable {
     var id = UUID().uuidString
     let numberOfRounds: Int
     var slots: [Slot]
-    
+}
+
+extension Workout {
     static let defaultWorkout = Workout(numberOfRounds: 3, slots: [Slot.defaultSlot])
 }
 
@@ -19,15 +28,10 @@ struct Slot: Identifiable, Codable {
     let id: Int
     let time: Int
     let option: Option
-    
-    static let defaultSlot = Slot(id: 0, time: 5, option: .work)
 }
 
-enum Option: Codable {
-    case prepare
-    case work
-    case rest
-    case finish
+extension Slot {
+    static let defaultSlot = Slot(id: 0, time: 5, option: .work)
 }
 
 extension Workout: Equatable {

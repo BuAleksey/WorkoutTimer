@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SetupWorkoutView: View {
-    @ObservedObject private var viewModel = SetupWorkoutViewModel()
-            
+    @StateObject private var viewModel = SetupWorkoutViewModel.shared
+    
     var body: some View {
         VStack {
             HStack {
@@ -20,9 +20,7 @@ struct SetupWorkoutView: View {
                         .onTapGesture { viewModel.selectedWorkoutViewIsShow.toggle() }
                         .sheet(isPresented: $viewModel.selectedWorkoutViewIsShow) {
                             SelectedWorkoutView(
-                                viewIsVisible: $viewModel.selectedWorkoutViewIsShow,
-                                workout: $viewModel.workout,
-                                selectedWorkout: $viewModel.selectedWorkout
+                                viewIsVisible: $viewModel.selectedWorkoutViewIsShow
                             )
                         }
                 }
@@ -30,8 +28,8 @@ struct SetupWorkoutView: View {
                 Spacer()
                 
                 SettingsBtnView()
-                    .onTapGesture { viewModel.settingsIsShow.toggle() }
-                    .sheet(isPresented: $viewModel.settingsIsShow) {
+                    .onTapGesture { viewModel.settingsViewIsShow.toggle() }
+                    .sheet(isPresented: $viewModel.settingsViewIsShow) {
                         SettingsView()
                     }
             }
@@ -49,6 +47,7 @@ struct SetupWorkoutView: View {
                     PickerView(choiceNumber: $viewModel.numberOfRounds)
                 }
                 .onChange(of: viewModel.numberOfRounds) { _ in
+                    viewModel.makeWorkout()
                     viewModel.checkWorkoutInSelected()
                 }
                 
@@ -58,9 +57,11 @@ struct SetupWorkoutView: View {
                     title: "WORK"
                 )
                 .onChange(of: viewModel.workTimeMinutes) { _ in
+                    viewModel.makeWorkout()
                     viewModel.checkWorkoutInSelected()
                 }
                 .onChange(of: viewModel.workTimeSeconds) { _ in
+                    viewModel.makeWorkout()
                     viewModel.checkWorkoutInSelected()
                 }
                 
@@ -70,9 +71,11 @@ struct SetupWorkoutView: View {
                     title: "REST"
                 )
                 .onChange(of: viewModel.restTimeMinutes) { _ in
+                    viewModel.makeWorkout()
                     viewModel.checkWorkoutInSelected()
                 }
                 .onChange(of: viewModel.restTimeSeconds) { _ in
+                    viewModel.makeWorkout()
                     viewModel.checkWorkoutInSelected()
                 }
             }
@@ -109,9 +112,7 @@ struct SetupWorkoutView: View {
             
             NavigationLink("", isActive: $viewModel.navigationLinkIsActive) {
                 TimerScrollView(
-                    workout: $viewModel.workout,
-                    navigationLinkIsActive: $viewModel.navigationLinkIsActive,
-                    numberOsRounds: viewModel.numberOfRounds
+                    navigationLinkIsActive: $viewModel.navigationLinkIsActive
                 )
             }
             .hidden()
@@ -119,7 +120,7 @@ struct SetupWorkoutView: View {
             Spacer()
         }
         .onAppear { viewModel.checkWorkoutInSelected() }
-        .onChange(of: viewModel.selectedWorkout) { _ in
+        .onChange(of: viewModel.setWorkoutFromSelected) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 withAnimation {
                     viewModel.setWorkoutParametrs()

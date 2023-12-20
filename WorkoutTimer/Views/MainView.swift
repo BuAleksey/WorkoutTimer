@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct MainView: View {
-    @ObservedObject private var mainSettings = MainSettings.shared
-    
     var body: some View {
         NavigationView {
             ZStack {
@@ -19,7 +17,6 @@ struct MainView: View {
             }
             .navigationBarHidden(true)
         }
-        .environmentObject(mainSettings)
     }
 }
 

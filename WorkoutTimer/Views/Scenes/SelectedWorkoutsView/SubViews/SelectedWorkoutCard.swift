@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct SelectedWorkoutCard: View {
-    @Binding var selectedWorkout: Workout
     @Binding var viewIsVisible: Bool
     
     @State private var showAlert = false
     
     var workout: Workout
+    
+    var workoutManager = WorkoutManager.shared
     
     private var numberOfRounds: String {
         setWorkoutParametrs(workout).numberOfRounds
@@ -110,18 +111,11 @@ struct SelectedWorkoutCard: View {
             }
         }
         .onTapGesture {
-            selectedWorkout = workout
+            workoutManager.workout = workout
+            workoutManager.setWorkoutFromSelected.toggle()
             viewIsVisible.toggle()
         }
     }
-}
-
-#Preview {
-    SelectedWorkoutCard(
-        selectedWorkout: .constant(.defaultWorkout),
-        viewIsVisible: .constant(true),
-        workout: .defaultWorkout
-    )
 }
 
 // MARK: - Private metods

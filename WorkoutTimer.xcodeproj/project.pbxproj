@@ -35,6 +35,8 @@
 		879CE4472AAC4D7600822FEB /* WorkoutTimerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879CE4462AAC4D7600822FEB /* WorkoutTimerUITestsLaunchTests.swift */; };
 		87CA003C2B0F528700500A52 /* ImpactFeedBackGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CA003B2B0F528700500A52 /* ImpactFeedBackGenerator.swift */; };
 		87CA003E2B0F584400500A52 /* rest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 87CA003D2B0F584300500A52 /* rest.mp3 */; };
+		87CD28C32B28481200596451 /* TimerScrollModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CD28C22B28481200596451 /* TimerScrollModelView.swift */; };
+		87CD28C52B28915500596451 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CD28C42B28915500596451 /* TimerViewModel.swift */; };
 		87DA0BA02B02337F00407B28 /* AddToSelectedWorkoutBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DA0B9F2B02337F00407B28 /* AddToSelectedWorkoutBtn.swift */; };
 		87EB0BFB2AC193F1000E1565 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EB0BFA2AC193F1000E1565 /* SettingsView.swift */; };
 		87F5C4552B1A012A00FDF996 /* SetupWorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F5C4542B1A012A00FDF996 /* SetupWorkoutViewModel.swift */; };
@@ -94,6 +96,8 @@
 		879CE4462AAC4D7600822FEB /* WorkoutTimerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTimerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		87CA003B2B0F528700500A52 /* ImpactFeedBackGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactFeedBackGenerator.swift; sourceTree = "<group>"; };
 		87CA003D2B0F584300500A52 /* rest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = rest.mp3; sourceTree = "<group>"; };
+		87CD28C22B28481200596451 /* TimerScrollModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerScrollModelView.swift; sourceTree = "<group>"; };
+		87CD28C42B28915500596451 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		87DA0B9F2B02337F00407B28 /* AddToSelectedWorkoutBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToSelectedWorkoutBtn.swift; sourceTree = "<group>"; };
 		87EB0BFA2AC193F1000E1565 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		87F5C4542B1A012A00FDF996 /* SetupWorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWorkoutViewModel.swift; sourceTree = "<group>"; };
@@ -172,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				8750C51E2B04E70F00867129 /* TimerScrollView.swift */,
+				87CD28C22B28481200596451 /* TimerScrollModelView.swift */,
 				87CA003F2B0F630D00500A52 /* SubViews */,
 			);
 			path = TimerView;
@@ -324,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				870DE31F2AB1A94300146F59 /* TimerView.swift */,
+				87CD28C42B28915500596451 /* TimerViewModel.swift */,
 			);
 			path = SubViews;
 			sourceTree = "<group>";
@@ -487,6 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87CD28C52B28915500596451 /* TimerViewModel.swift in Sources */,
 				87FAA4BC2ABAD0D40077E4AB /* TimePresent.swift in Sources */,
 				87F5C45E2B1E14B600FDF996 /* HorizontalCapView.swift in Sources */,
 				8750C51F2B04E70F00867129 /* TimerScrollView.swift in Sources */,
@@ -496,6 +503,7 @@
 				87F5C45C2B1E110F00FDF996 /* ClearBntView.swift in Sources */,
 				876F6E1C2ABC2E5E00E00CBB /* WorkoutManager.swift in Sources */,
 				87F5C4552B1A012A00FDF996 /* SetupWorkoutViewModel.swift in Sources */,
+				87CD28C32B28481200596451 /* TimerScrollModelView.swift in Sources */,
 				870DE3202AB1A94300146F59 /* TimerView.swift in Sources */,
 				87CA003C2B0F528700500A52 /* ImpactFeedBackGenerator.swift in Sources */,
 				879483C72AB6C962008A2925 /* SetupWorkoutView.swift in Sources */,
