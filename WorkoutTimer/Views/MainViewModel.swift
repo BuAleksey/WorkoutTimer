@@ -1,21 +1,23 @@
 //
-//  SetupWorkoutViewModel.swift
+//  MainViewModel.swift
 //  WorkoutTimer
 //
-//  Created by Buba on 01.12.2023.
+//  Created by Buba on 20.12.2023.
 //
 
 import SwiftUI
 import Combine
 
-final class SetupWorkoutViewModel: ObservableObject {
-    static let shared = SetupWorkoutViewModel()
-        
+final class MainViewModel: ObservableObject {
+    static let shared = MainViewModel()
+    
+    @Published var showParametrsSetupView = false
+    @Published var showWorkout = false
+    
     @Published var selectedWorkoutViewIsShow = false
     @Published var settingsViewIsShow = false
-    @Published var hintIsShow = false
+    @Published var isWorkoutParametrsAreValid = false
     @Published var showAddToSelectedWorkoutBtn = false
-    @Published var navigationLinkIsActive = false
         
     @Published var numberOfRounds = 1
     @Published var workTimeMinutes = 0
@@ -23,7 +25,8 @@ final class SetupWorkoutViewModel: ObservableObject {
     @Published var restTimeMinutes = 0
     @Published var restTimeSeconds = 0
     
-    @StateObject private var workoutManager = WorkoutManager.shared
+    @ObservedObject private var workoutManager = WorkoutManager.shared
+    @ObservedObject private var timer = TimerCounter.shared
     
     var selectedWorkoutIsEmpty: Bool {
         DataManager.shared.selectedWorkouts.isEmpty
@@ -41,6 +44,7 @@ final class SetupWorkoutViewModel: ObservableObject {
     private var restTimeCount: Int {
         restTimeMinutes * 60 + restTimeSeconds
     }
+    private var bag: [AnyCancellable] = []
     
     func makeWorkout() {
         workoutManager.createWorkout(
@@ -48,27 +52,16 @@ final class SetupWorkoutViewModel: ObservableObject {
             workTimeCount: workTimeCount,
             restTimeCount: restTimeCount
         )
+        
+        checkWorkoutInSelected()
     }
     
     func startWorkout() {
-        workoutManager.clearCyclesCounter()
+        timer.clearTimer()
         if workoutManager.isWorkoutParametrsAreValid {
-            navigationLinkIsActive.toggle()
-        } else {
             withAnimation {
-                hintIsShow = !workoutManager.isWorkoutParametrsAreValid
+                showWorkout.toggle()
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                withAnimation { [unowned self] in
-                    self.hintIsShow = false
-                }
-            }
-        }
-    }
-    
-    func checkWorkoutInSelected() {
-        withAnimation {
-            showAddToSelectedWorkoutBtn = !DataManager.shared.isWorkoutContainedInSelected(workoutManager.workout)
         }
     }
     
@@ -95,5 +88,17 @@ final class SetupWorkoutViewModel: ObservableObject {
         restTimeSeconds = timePresent.setWorkoutParametrs(
             workoutManager.workout
         ).restTime.sec
+    }
+    
+    private init() {
+        workoutManager.$isWorkoutParametrsAreValid
+            .sink { [unowned self] bool in
+                isWorkoutParametrsAreValid = bool
+            }
+            .store(in: &bag)
+    }
+    
+    private func checkWorkoutInSelected() {
+        showAddToSelectedWorkoutBtn = !DataManager.shared.isWorkoutContainedInSelected(workoutManager.workout)
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ClearBntView: View {
     @State private var shouldShake = false
+    
     var action = {}
     
     var body: some View {
@@ -17,7 +18,10 @@ struct ClearBntView: View {
                 .font(.title3)
                 .foregroundColor(.attention)
                 .rotationEffect(Angle(degrees: shouldShake ? 7 : 0))
-                .animation(Animation.default.speed(1).repeatCount(3), value: shouldShake)
+                .animation(
+                    Animation.default.speed(1).repeatCount(3),
+                    value: shouldShake
+                )
                 .onAppear {
                     shouldShake = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -26,8 +30,4 @@ struct ClearBntView: View {
                 }
         }
     }
-}
-
-#Preview {
-    ClearBntView()
 }

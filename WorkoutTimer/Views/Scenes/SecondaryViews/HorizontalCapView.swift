@@ -16,7 +16,3 @@ struct HorizontalCapView: View {
             .foregroundStyle(Color.clear)
     }
 }
-
-#Preview {
-    HorizontalCapView(width: 100)
-}

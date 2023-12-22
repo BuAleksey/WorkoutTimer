@@ -10,9 +10,8 @@ import SwiftUI
 struct SelectedWorkoutView: View {
     @Binding var viewIsVisible: Bool
     
-    @StateObject private var dataManager = DataManager.shared
+    @ObservedObject private var dataManager = DataManager.shared
     
-    var workoutManager = WorkoutManager.shared
     private let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -21,10 +20,6 @@ struct SelectedWorkoutView: View {
                 .ignoresSafeArea()
             VStack {
                 HStack {
-                    HorizontalCapView(width: 30)
-                    Spacer()
-                    Text("SELECTED WORKOUTS")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
                     Spacer()
                     ClearBntView(action: { dataManager.clearSelectedWorkouts() })
                         .frame(width: 30)
@@ -53,12 +48,12 @@ struct SelectedWorkoutView: View {
                 }
                 Spacer()
             }
+            .foregroundStyle(Color.textColor)
             .onChange(of: dataManager.selectedWorkouts.isEmpty) { _ in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     viewIsVisible = false
                 }
             }
-            .foregroundColor(.action)
             .ignoresSafeArea()
             .padding([.top, .leading, .trailing])
         }

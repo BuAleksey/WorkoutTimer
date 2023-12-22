@@ -16,13 +16,13 @@ struct SelectionView: View {
     var body: some View {
         VStack {
             Text(title)
-                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .font(.system(size: 20, weight: .thin, design: .rounded))
             VStack(spacing: -10) {
                 HStack(spacing: 32) {
                     Text("min")
                     Text("sec")
                 }
-                .font(.system(size: 15, weight: .light, design: .rounded))
+                .font(.system(size: 15, weight: .ultraLight, design: .rounded))
                 HStack(spacing: -15) {
                     PickerView(
                         choiceNumber: $timeMinutes,
@@ -46,8 +46,8 @@ struct PickerView: View {
         Picker("", selection: $choiceNumber) {
             ForEach(range, id: \.self) { number in
                 Text(number.formatted())
-                    .foregroundColor(.action)
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+                    .foregroundColor(.textColor)
+                    .font(.system(size: 15, weight: .light, design: .rounded))
             }
         }
         .pickerStyle(WheelPickerStyle())

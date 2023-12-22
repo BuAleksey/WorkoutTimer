@@ -15,11 +15,6 @@ final class WorkoutManager: ObservableObject {
     @Published var isWorkoutParametrsAreValid = false
     @Published var setWorkoutFromSelected = false
     
-    @Published var cycleNumber = 1
-    @Published var workCycleNumber = 1
-    
-    private init() {}
-    
     func createWorkout(numberOfRounds: Int, workTimeCount: Int, restTimeCount: Int) {
         var id = 1
         var slots: [Slot] = []
@@ -71,16 +66,5 @@ final class WorkoutManager: ObservableObject {
         workout = Workout(numberOfRounds: numberOfRounds, slots: slots)
     }
     
-    func nextCycle() {
-        cycleNumber += 1
-    }
-    
-    func nextWorkCycle() {
-        workCycleNumber += 1
-    }
-    
-    func clearCyclesCounter() {
-        cycleNumber = 1
-        workCycleNumber = 1
-    }
+    private init() {}
 }

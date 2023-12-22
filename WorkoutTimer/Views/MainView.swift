@@ -8,18 +8,30 @@
 import SwiftUI
 
 struct MainView: View {
+    @ObservedObject private var viewModel = MainViewModel.shared
+    
     var body: some View {
-        NavigationView {
-            ZStack {
-                Color.accentColor
-                    .ignoresSafeArea(.all)
-                SetupWorkoutView()
+        ZStack {
+            StartTimerView()
+            
+            if viewModel.showParametrsSetupView {
+                HeadView()
+                
+                ParametrsSetupView()
+                    .transition(.move(edge: .bottom))
             }
-            .navigationBarHidden(true)
+            
+            if viewModel.showWorkout {
+                TimerView(viewIsVisible: $viewModel.showWorkout)
+                    .transition(.move(edge: .bottom))
+            }
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                withAnimation(.easeInOut(duration: 1)) {
+                    viewModel.showParametrsSetupView.toggle()
+                }
+            }
         }
     }
-}
-
-#Preview {
-    MainView()
 }

@@ -21,7 +21,7 @@ struct Workout: Identifiable, Codable {
 }
 
 extension Workout {
-    static let defaultWorkout = Workout(numberOfRounds: 3, slots: [Slot.defaultSlot])
+    static let defaultWorkout = Workout(numberOfRounds: 1, slots: [Slot.defaultSlot])
 }
 
 struct Slot: Identifiable, Codable {
@@ -31,7 +31,7 @@ struct Slot: Identifiable, Codable {
 }
 
 extension Slot {
-    static let defaultSlot = Slot(id: 0, time: 5, option: .work)
+    static let defaultSlot = Slot(id: 1, time: 0, option: .work)
 }
 
 extension Workout: Equatable {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @StateObject private var mainSettings = MainSettings.shared
+    @ObservedObject private var dataManager = DataManager.shared
     
     var body: some View {
         ZStack {
@@ -17,34 +17,18 @@ struct SettingsView: View {
             VStack {
                 VStack {
                     HStack {
-                        Text("SETTINGS")
-                            .font(.system(size: 20, weight: .bold, design: .rounded))
-                    }
-                    Spacer()
-                        .frame(height: 50)
-                    HStack {
-                        Toggle("Sound", isOn: $mainSettings.soundIsOn)
-                            .tint(.action)
+                        Toggle("Sound", isOn: $dataManager.audioIsOn)
+                            .tint(.textColor)
                     }
                     HStack {
-                        Toggle("Vibrate", isOn: $mainSettings.vibrateIsOn)
-                            .tint(.action)
+                        Toggle("Vibrate", isOn: $dataManager.impactIsOn)
+                            .tint(.textColor)
                     }
                 }
-                .foregroundColor(.action)
+                .foregroundStyle(Color.inversionAccentColor)
                 .font(.system(size: 15, weight: .bold, design: .rounded))
                 
                 Spacer()
-                
-                Text("""
-                         Contact information:
-                         oldf03@gmail . com
-                         """)
-                .foregroundStyle(Color.white)
-                .font(.system(size: 10, weight: .medium, design: .rounded))
-                
-                Spacer()
-                    .frame(height: 50)
             }
             .padding()
         }

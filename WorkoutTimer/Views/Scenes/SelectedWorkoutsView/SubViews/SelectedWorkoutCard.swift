@@ -13,7 +13,6 @@ struct SelectedWorkoutCard: View {
     @State private var showAlert = false
     
     var workout: Workout
-    
     var workoutManager = WorkoutManager.shared
     
     private var numberOfRounds: String {
@@ -34,6 +33,7 @@ struct SelectedWorkoutCard: View {
                 .overlay {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(lineWidth: 1)
+                        .foregroundStyle(Color.inversionAccentColor)
                 }
             
             ZStack {
@@ -70,7 +70,7 @@ struct SelectedWorkoutCard: View {
                         ))
                     Text("\(numberOfRounds)")
                         .font(.system(size: 20, weight: .heavy, design: .rounded))
-                        .foregroundStyle(Color.white)
+                        .foregroundStyle(Color.inversionAccentColor)
                         .padding(.bottom, 10)
                     
                     HStack {
@@ -87,7 +87,7 @@ struct SelectedWorkoutCard: View {
                                     weight: .heavy,
                                     design: .rounded
                                 ))
-                                .foregroundStyle(Color.white)
+                                .foregroundStyle(Color.inversionAccentColor)
                         }
                         
                         VStack {
@@ -103,11 +103,11 @@ struct SelectedWorkoutCard: View {
                                     weight: .heavy,
                                     design: .rounded
                                 ))
-                                .foregroundStyle(Color.white)
+                                .foregroundStyle(Color.inversionAccentColor)
                         }
                     }
                 }
-                .foregroundStyle(Color.action)
+                .foregroundStyle(Color.textColor)
             }
         }
         .onTapGesture {

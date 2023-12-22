@@ -13,7 +13,7 @@ struct SettingsBtnView: View {
     var body: some View {
         Image(systemName: "gear")
             .font(.title)
-            .foregroundColor(.action)
+            .foregroundStyle(Color.inversionAccentColor)
             .rotationEffect(Angle(degrees: rotation))
             .animation(
                 .linear(duration: 2),
@@ -27,8 +27,4 @@ struct SettingsBtnView: View {
                 }
             }
     }
-}
-
-#Preview {
-    SettingsBtnView()
 }

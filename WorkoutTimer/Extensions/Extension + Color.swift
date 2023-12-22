@@ -8,9 +8,9 @@
 import SwiftUI
 
 extension Color {
-    static let action = Color("ActionColor")
-    static let attention = Color("AttentionColor")
-    static let finish = Color("FinishColor")
-    static let gold = Color("GoldColor")
-    static let prepear = Color("PrepearColor")
+    static let inversionAccentColor = Color("InversionAccentColor")
+    static let textColor = Color("TextColor")
+    
+    static let attentionColor = Color("AttentionColor")
+    static let goldColor = Color("GoldColor")
 }
