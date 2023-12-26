@@ -112,8 +112,10 @@ struct SelectedWorkoutCard: View {
         }
         .onTapGesture {
             workoutManager.workout = workout
-            workoutManager.setWorkoutFromSelected.toggle()
-            viewIsVisible.toggle()
+            withAnimation {
+                workoutManager.setWorkoutFromSelected.toggle()
+                viewIsVisible.toggle()
+            }
         }
     }
 }

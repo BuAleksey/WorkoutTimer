@@ -73,21 +73,31 @@ final class MainViewModel: ObservableObject {
     }
     
     func setWorkoutParametrs() {
-        numberOfRounds = timePresent.setWorkoutParametrs(
-            workoutManager.workout
-        ).numberOfRounds
-        workTimeMinutes = timePresent.setWorkoutParametrs(
-            workoutManager.workout
-        ).workTime.min
-        workTimeSeconds = timePresent.setWorkoutParametrs(
-            workoutManager.workout
-        ).workTime.sec
-        restTimeMinutes = timePresent.setWorkoutParametrs(
-            workoutManager.workout
-        ).restTime.min
-        restTimeSeconds = timePresent.setWorkoutParametrs(
-            workoutManager.workout
-        ).restTime.sec
+        withAnimation {
+            numberOfRounds = timePresent.setWorkoutParametrs(
+                workoutManager.workout
+            ).numberOfRounds
+            workTimeMinutes = timePresent.setWorkoutParametrs(
+                workoutManager.workout
+            ).workTime.min
+            workTimeSeconds = timePresent.setWorkoutParametrs(
+                workoutManager.workout
+            ).workTime.sec
+            restTimeMinutes = timePresent.setWorkoutParametrs(
+                workoutManager.workout
+            ).restTime.min
+            restTimeSeconds = timePresent.setWorkoutParametrs(
+                workoutManager.workout
+            ).restTime.sec
+        }
+    }
+    
+    func addToSelectedWorkoutBtnTapped() {
+        selectedWorkoutViewIsShow.toggle()
+    }
+    
+    func settingsBtnTapped() {
+        settingsViewIsShow.toggle()
     }
     
     private init() {
@@ -99,6 +109,8 @@ final class MainViewModel: ObservableObject {
     }
     
     private func checkWorkoutInSelected() {
-        showAddToSelectedWorkoutBtn = !DataManager.shared.isWorkoutContainedInSelected(workoutManager.workout)
+        withAnimation {
+            showAddToSelectedWorkoutBtn = !DataManager.shared.isWorkoutContainedInSelected(workoutManager.workout)
+        }
     }
 }

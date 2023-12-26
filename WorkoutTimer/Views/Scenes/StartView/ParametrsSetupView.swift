@@ -26,10 +26,12 @@ struct ParametrsSetupView: View {
                     .padding(.bottom, 8)
                 
                 HStack(spacing: -3) {
-                    VStack(spacing: -11) {
+                    VStack(spacing: -18) {
                         VStack(spacing: -5) {
-                            Text("ROUNDS")
                             Text("NUMBER")
+                            Text("OF")
+                                .font(.system(size: 10, weight: .thin, design: .rounded))
+                            Text("ROUNDS")
                         }
                         .font(.system(size: 20, weight: .thin, design: .rounded))
                         PickerView(choiceNumber: $viewModel.numberOfRounds)
@@ -77,14 +79,12 @@ struct ParametrsSetupView: View {
                     
                     Spacer()
                     
-                    HStack {
-                        if viewModel.isWorkoutParametrsAreValid && viewModel.showAddToSelectedWorkoutBtn {
-                            AddToSelectedWorkoutBtn(action: viewModel.addToSelectedWorkout)
-                        } else {
-                            HorizontalCapView(width: 100)
-                        }
+                    if viewModel.isWorkoutParametrsAreValid && viewModel.showAddToSelectedWorkoutBtn {
+                        AddToSelectedWorkoutBtn(action: viewModel.addToSelectedWorkout)
+                    } else {
+                        HorizontalCapView(width: 100)
+                            .offset(x: -30, y: -1)
                     }
-                    .offset(x: -30)
                 }
             }
             .onChange(of: viewModel.setWorkoutFromSelected) { _ in

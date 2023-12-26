@@ -14,25 +14,21 @@ struct HeadView: View {
         VStack {
             HStack {
                 if !viewModel.selectedWorkoutIsEmpty {
-                    SelectWorkoutBtnView()
-                        .onTapGesture {
-                            viewModel.selectedWorkoutViewIsShow.toggle()
+                    SelectWorkoutBtnView(
+                        action: viewModel.addToSelectedWorkoutBtnTapped
+                    )
+                    .sheet(
+                        isPresented: $viewModel.selectedWorkoutViewIsShow) {
+                            SelectedWorkoutView(
+                                viewIsVisible:
+                                    $viewModel.selectedWorkoutViewIsShow
+                            )
                         }
-                        .sheet(
-                            isPresented: $viewModel.selectedWorkoutViewIsShow) {
-                                SelectedWorkoutView(
-                                    viewIsVisible:
-                                        $viewModel.selectedWorkoutViewIsShow
-                                )
-                            }
                 }
                 
                 Spacer()
                 
-                SettingsBtnView()
-                    .onTapGesture {
-                        viewModel.settingsViewIsShow.toggle()
-                    }
+                SettingsBtnView(action: viewModel.settingsBtnTapped)
                     .sheet(
                         isPresented: $viewModel.settingsViewIsShow) {
                             SettingsView()

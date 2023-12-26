@@ -14,11 +14,8 @@ struct AddToSelectedWorkoutBtn: View {
         Button(action: action) {
             ZStack {
                 Image(systemName: "star.fill")
-                    .foregroundStyle(Color.inversionAccentColor)
-                    .font(.title2)
-                Image(systemName: "star.fill")
                     .foregroundStyle(Color.textColor)
-                    .font(.system(size: 10))
+                    .font(.title2)
             }
         }
         .frame(width: 100)
